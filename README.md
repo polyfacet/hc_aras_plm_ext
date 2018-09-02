@@ -9,12 +9,12 @@ Features in short:
 * A better BOM Compare
 * Part Validation concept
 * Part variant creation
-* Property Coloring (Not implemented)
+* Property coloring (Not implemented)
 * Open in background (Not implemented)
 * Tree Grid View example
 * Extended API:
    * History handling
-   * Copy from Vault Serve Side
+   * Copy from Vault Server Side
    * ActivityExt
    
  
