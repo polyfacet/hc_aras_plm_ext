@@ -1,0 +1,14 @@
+<AML>
+	<Item type="Server Event" id="26A6F9A162F94BD3AF45A5C3862BDD7F" action="add">
+		<event_version>version_1</event_version>
+		<is_required>0</is_required>
+		<related_id keyed_name="HC_FixNameIdentity" type="Method">
+			<Item type="Method" action="get" select="id">
+				<name>HC_FixNameIdentity</name>
+			</Item>
+		</related_id>
+		<server_event>onAfterAdd</server_event>
+		<sort_order>1280</sort_order>
+		<source_id keyed_name="User" type="ItemType" name="User">45E899CD2859442982EB22BB2DF683E5</source_id>
+	</Item>
+</AML>

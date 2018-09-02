@@ -1,0 +1,27 @@
+﻿<AML>
+ <Item type="Method" id="05B2F656366B4BA28249597F1B4A1661" action="add">
+  <comments>This Method sets the login_name from user on the Identity</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//This Method sets the login_name from user on the Identity
+
+// Find the corresponding Identity by first and last name
+string nameToFind = this.getProperty("first_name") + " " + this.getProperty("last_name");
+Item identity = this.getInnovator().newItem("Identity", "get");
+identity.setProperty("name",nameToFind);
+identity = identity.apply();
+
+// Update identity
+Item updateIdentity = this.getInnovator().newItem("Identity", "edit");
+updateIdentity.setID(identity.getID());
+updateIdentity.setProperty("description", this.getProperty("login_name"));
+updateIdentity = updateIdentity.apply();
+
+return this;
+
+
+
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>HC_FixNameIdentity</name>
+ </Item>
+</AML>

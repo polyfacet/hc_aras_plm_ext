@@ -1,0 +1,5 @@
+<imports>
+  <package name="se.hilleconsultit.hccore" path="hccore\Import">
+    <dependson name="com.aras.innovator.solution.PLM" />
+  </package>
+</imports>

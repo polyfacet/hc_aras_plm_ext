@@ -1,0 +1,199 @@
+﻿<AML>
+ <Item type="ItemType" id="4D1DA47DD2574D06BC31D7308D05F4A4" action="add">
+  <allow_private_permission>1</allow_private_permission>
+  <auto_search>0</auto_search>
+  <enforce_discovery>1</enforce_discovery>
+  <hide_where_used>0</hide_where_used>
+  <implementation_type>federated</implementation_type>
+  <instance_data>HC_VALIDATION</instance_data>
+  <is_dependent>0</is_dependent>
+  <is_relationship>0</is_relationship>
+  <is_versionable>0</is_versionable>
+  <label xml:lang="en">Validation</label>
+  <label_plural xml:lang="en">Validations</label_plural>
+  <revisions keyed_name="Default" type="Revision">7FE395DD8B9F4E1090756A34B733D75E</revisions>
+  <show_parameters_tab>1</show_parameters_tab>
+  <structure_view>tabs off</structure_view>
+  <unlock_on_logout>0</unlock_on_logout>
+  <use_src_access>0</use_src_access>
+  <name>HC Validation</name>
+  <Relationships>
+   <Item type="Property" id="1CCBD6FD45FF400F8ADAAE74663E512A" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>300</column_width>
+    <data_type>string</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Description</label>
+    <order_by>2</order_by>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3200</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>description</name>
+   </Item>
+   <Item type="Property" id="7491C6D95D264E74B1278EBCCB0C3937" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>20</column_width>
+    <data_type>image</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en"> . </label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3070</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <track_history>0</track_history>
+    <name>image</name>
+   </Item>
+   <Item type="Property" id="A28188031CDA439E90554A0CDFF7DD0F" action="add">
+    <column_alignment>left</column_alignment>
+    <data_source keyed_name="HC Validation Item" type="ItemType" name="HC Validation Item">2A448CB136784394AC5F4F0BB81ED55A</data_source>
+    <data_type>item</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <item_behavior>float</item_behavior>
+    <label xml:lang="en">Item</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3712</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <track_history>0</track_history>
+    <name>item</name>
+   </Item>
+   <Item type="Property" id="E82CAFA554FC4AA5B845A71A107AB4A5" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>string</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Item Number</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3584</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <stored_length>64</stored_length>
+    <track_history>0</track_history>
+    <name>item_number</name>
+   </Item>
+   <Item type="Property" id="A118BD5F89EB495FA1B75E497E67F408" action="add">
+    <column_alignment>left</column_alignment>
+    <data_type>string</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Item Type</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3456</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <stored_length>64</stored_length>
+    <track_history>0</track_history>
+    <name>item_type</name>
+   </Item>
+   <Item type="Property" id="5CE5ED88F09D40FD8BABAA4F5B502E88" action="add">
+    <column_alignment>left</column_alignment>
+    <column_width>400</column_width>
+    <data_type>text</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Long Description</label>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3328</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <track_history>0</track_history>
+    <name>long_description</name>
+   </Item>
+   <Item type="Property" id="F3386182CCAF4729B01C6C8B8881386E" action="add">
+    <column_alignment>left</column_alignment>
+    <data_source keyed_name="HC ValidationTypes">0285BC3D55A24950BA6884C27915556B</data_source>
+    <data_type>list</data_type>
+    <is_hidden>0</is_hidden>
+    <is_hidden2>0</is_hidden2>
+    <is_indexed>0</is_indexed>
+    <is_keyed>0</is_keyed>
+    <is_multi_valued>0</is_multi_valued>
+    <is_required>0</is_required>
+    <label xml:lang="en">Validation Type</label>
+    <order_by>1</order_by>
+    <range_inclusive>0</range_inclusive>
+    <readonly>0</readonly>
+    <sort_order>3072</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+    <stored_length>256</stored_length>
+    <track_history>0</track_history>
+    <name>validation_type</name>
+   </Item>
+   <Item type="Server Event" id="5CE4BA470C664D8DA867E92DE12CE14C" action="add">
+    <event_version>version_1</event_version>
+    <is_required>0</is_required>
+    <related_id keyed_name="HC_CommonDontAdd" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>HC_CommonDontAdd</name>
+     </Item>
+    </related_id>
+    <server_event>onAdd</server_event>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+   </Item>
+   <Item type="ItemType Life Cycle" id="91091BE1728245B5985551086CB050CC" action="add">
+    <related_id keyed_name="Default" type="Life Cycle Map">2F3B75E17C4E4F2D9599579A965BFA64</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+   </Item>
+   <Item type="Can Add" id="21D181F39CBB41EC931349D4D4AC0675" action="add">
+    <can_add>1</can_add>
+    <related_id keyed_name="World" type="Identity">
+     <Item type="Identity" action="get" select="id">
+      <name>World</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+   </Item>
+   <Item type="Allowed Permission" id="BECD417BB6CC403F98BD966A7701D994" action="add">
+    <is_default>0</is_default>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+   </Item>
+   <Item type="Allowed Permission" id="CF8932248C6E4703ACEC90AA99201948" action="add">
+    <is_default>0</is_default>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+   </Item>
+   <Item type="Allowed Permission" id="6F3A3E64F0454DC0898E7044714D1C92" action="add">
+    <is_default>1</is_default>
+    <related_id keyed_name="Default Access" type="Permission">9122CD065CF04141B8EFE263FC80BEA4</related_id>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="HC Validation" type="ItemType" name="HC Validation">4D1DA47DD2574D06BC31D7308D05F4A4</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+ <Item type="View" action="delete" where="source_id='4D1DA47DD2574D06BC31D7308D05F4A4'" />
+ <Item type="Form" action="delete" where="name='HC Validation'" />
+</AML>

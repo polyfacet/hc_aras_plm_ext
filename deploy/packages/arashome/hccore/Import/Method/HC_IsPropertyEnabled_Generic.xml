@@ -1,0 +1,68 @@
+﻿<AML>
+ <Item type="Method" id="1061162AF3DE42598406AAEDCE42C1EC" action="add">
+  <comments>Checks if a named HCAras Property is enabled for all/identity</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA['MethodTemplateName=VBMain;
+
+' Checks for the name "inputName" in the HC Properties and evaluets if it is enabled or not.
+
+
+Function Main() As Item
+
+    Dim inn as Innovator = Me.getInnovator()
+    Dim boolString As String    
+    Dim inputName As String = Me.node.InnerText
+
+    If IsEnabled(inputName) Then
+        boolString = "TRUE"
+    Else
+        boolString = "FALSE"
+    End If
+    
+    Dim result As Item = inn.newResult(boolString)
+    Return result
+
+End Function
+
+Private Function IsEnabled(ByVal propertyName As String) As Boolean
+    Try
+        Dim myProp As Item = GetPropertyItem(propertyName)
+
+        ' If user is part of the enabled_id, check the enabled_for_identity property
+        ' Else use the enabled property
+
+        Dim enabledProperty As String = "enabled"
+
+        Dim idIdentity = myProp.getProperty("enabled_identity", "")
+        If idIdentity <> "" Then
+            'Note: If no idIdentiry is set the standard enabled will be used
+            If CCO.Permissions.IdentityListHasId(Aras.Server.Security.Permissions.Current.IdentitiesList, idIdentity) Then
+                ' User is a part of the identity
+                enabledProperty = "enabled_for_identity"
+            End If
+        End If
+
+        Dim enabled As String = myProp.getProperty(enabledProperty, "1")
+        Dim res As Boolean = If(enabled = "1", True, False)
+        Return res
+    Catch ex As Exception
+        CCO.Utilities.WriteDebug("ERROR_HC_IsPropertyEnabled_Generic", ex.ToString())
+        Return True
+    End Try
+
+End Function
+
+Private Function GetPropertyItem(ByVal name As String) As Item
+     Dim amlQuery As New StringBuilder
+     amlQuery.Append("<AML><Item action='get' type='HC Properties' >")
+     amlQuery.AppendFormat("<name condition='eq'>{0}</name>", name)
+     amlQuery.Append("</Item></AML>")
+     Dim result = Me.getInnovator().applyAML(amlQuery.ToString)
+     Return result
+End Function
+
+]]></method_code>
+  <method_type>VB</method_type>
+  <name>HC_IsPropertyEnabled_Generic</name>
+ </Item>
+</AML>

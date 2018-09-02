@@ -1,0 +1,8 @@
+﻿<AML>
+ <Item type="History Action" id="26FC2D778BFB4D749FA4401726EBEF44" action="edit">
+  <comment_text xml:lang="en">{form_name}</comment_text>
+  <is_internal>0</is_internal>
+  <label xml:lang="en">Print</label>
+  <name>FormPrint</name>
+ </Item>
+</AML>

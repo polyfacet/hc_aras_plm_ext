@@ -1,0 +1,25 @@
+﻿<AML>
+ <Item type="List" id="0285BC3D55A24950BA6884C27915556B" action="add">
+  <name>HC ValidationTypes</name>
+  <Relationships>
+   <Item type="Value" id="099017A4B311472087C0E017B3C4A618" action="add">
+    <label xml:lang="en">Error</label>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC ValidationTypes" type="List">0285BC3D55A24950BA6884C27915556B</source_id>
+    <value>Error</value>
+   </Item>
+   <Item type="Value" id="1E8552CF07CC4C7985A7B76E7687DF6E" action="add">
+    <label xml:lang="en">Warning</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="HC ValidationTypes" type="List">0285BC3D55A24950BA6884C27915556B</source_id>
+    <value>Warning</value>
+   </Item>
+   <Item type="Value" id="608FE407A62E4EE582123F1EC89622BE" action="add">
+    <label xml:lang="en">Info</label>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="HC ValidationTypes" type="List">0285BC3D55A24950BA6884C27915556B</source_id>
+    <value>Info</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

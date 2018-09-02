@@ -1,0 +1,43 @@
+﻿<AML>
+ <Item type="History Template" id="26052CF4511F4502B43B50771A308B47" action="add">
+  <property_history>1</property_history>
+  <name>MyDefault</name>
+  <Relationships>
+   <Item type="History Template Action" id="726C6430D1034FD1B2E2CBA7164BEBEA" action="add">
+    <related_id keyed_name="ResetLifeCycleState" type="History Action">D8A02D25A8AD4E0BA03137BF7E12989B</related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+   <Item type="History Template Action" id="AC5DCFE783314DA0B09CB74F7496CD04" action="add">
+    <related_id keyed_name="SetDefaultLifecycle" type="History Action">D921FE4EB74043DBA94EA79543FA0EE0</related_id>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+   <Item type="History Template Action" id="AEAA9881F61D49E99A89D06401FC6E33" action="add">
+    <related_id keyed_name="Promote" type="History Action">F4E64892AF944B4FA297B27B6BB5653D</related_id>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+   <Item type="History Template Action" id="DE6DDCE046B2414EAE268DFE97BB35B1" action="add">
+    <related_id keyed_name="Add" type="History Action">22490941AB8E4996BE0C4EA4940DD7B9</related_id>
+    <sort_order>512</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+   <Item type="History Template Action" id="81EA4F00AA914D25B95C000632504576" action="add">
+    <related_id keyed_name="Delete" type="History Action">3C23BB1FCACC4EBEB12CA1D74A8CE1C2</related_id>
+    <sort_order>640</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+   <Item type="History Template Action" id="67F508585C7C4DF7AA9CC4565A957C1C" action="add">
+    <related_id keyed_name="Update" type="History Action">DA76064A64B8456CA21ECB70BE4A48C3</related_id>
+    <sort_order>768</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+   <Item type="History Template Action" id="11AF63C3DF9C490C90B05F73828848EA" action="add">
+    <related_id keyed_name="FormPrint" type="History Action">26FC2D778BFB4D749FA4401726EBEF44</related_id>
+    <sort_order>1024</sort_order>
+    <source_id keyed_name="MyDefault" type="History Template">26052CF4511F4502B43B50771A308B47</source_id>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

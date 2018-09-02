@@ -1,0 +1,39 @@
+﻿<AML>
+ <Item type="Method" id="A6B271F2F25F4DD9A7D806133F1DF5BA" action="add">
+  <comments>Gets the value of specific HCAras Property</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA['MethodTemplateName=VBMain;
+
+' Gets the value for the name "inputName" in the HC Properties 
+
+Function Main() As Item
+     Dim inn as Innovator = Me.getInnovator()
+     Dim inputName As String = Me.node.InnerText
+     Dim value As String = GetValue(inputName)
+     Dim result As Item = inn.newResult(value)
+     Return result
+End Function
+
+Private Function GetValue(ByVal propertyName As String) As String
+    Try
+        Dim myProp As Item = GetPropertyItem(propertyName)
+        Dim value As String = myProp.getProperty("value", "")
+        Return value
+    Catch ex As Exception
+        CCO.Utilities.WriteDebug("ERROR_HC_GetPropertyValue_Generic", ex.ToString())
+        Return ""
+    End Try
+End Function
+
+Private Function GetPropertyItem(ByVal name As String) As Item
+     Dim amlQuery As New StringBuilder
+     amlQuery.Append("<AML><Item action='get' type='HC Properties' >")
+     amlQuery.AppendFormat("<name condition='eq'>{0}</name>", name)
+     amlQuery.Append("</Item></AML>")
+     Dim result = Me.getInnovator().applyAML(amlQuery.ToString)
+     Return result
+End Function]]></method_code>
+  <method_type>VB</method_type>
+  <name>HC_GetPropertyValue_Generic</name>
+ </Item>
+</AML>
