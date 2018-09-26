@@ -1,0 +1,117 @@
+﻿<AML>
+ <Item type="Method" id="C543385A7DB542E6B6A2AB4B77E432EA" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[        // Specifc ctrl. before release
+        // Checks the Validation tab for errors before releasing
+
+        Utils.InitializeForRequest(this.getInnovator(), CCO);
+        //System.Diagnostics.Debugger.Break();
+        Inn = this.getInnovator();
+        string thisType = this.getAttribute("type");
+        
+        // Get target state
+        string key = eventData.ItemTransitions.Keys.First();
+        Aras.Server.Core.LifeCycleTransitionInfo lcTransInfo = eventData.ItemTransitions[key];
+        
+        if (lcTransInfo.ToState.Name == "Released") {
+            // Only at Release
+            string idList = this.getAttribute("idlist");
+            List<string> ids = idList.Split(',').ToList();
+                
+            foreach (string id in ids) {
+                // Load errors
+                int errorCount = ErrorValidationsCount(id);
+                if (errorCount > 0) {
+                    Item partItem = Inn.getItemById(thisType,id);
+                    // Has errors create new errors
+                    string errorMessage = @"Part number {0} can not be released. {1} 
+                                            It has {2} validation error(s). Please check the parts validation tab and take actions before releasing.";
+                    errorMessage = String.Format(errorMessage, partItem.getProperty("item_number" ,""), FirstErrorMessageDescription, errorCount.ToString());  
+                    return Inn.newError(errorMessage);
+                }    
+            }
+        }
+        
+        // OK
+        return this;
+
+    } // End Main method
+    
+    
+    private Innovator Inn;
+    private string FirstErrorMessageDescription;
+
+    private int ErrorValidationsCount(string id) {
+        int result = 0;
+        string amlQuery = @"<AML>
+                                <Item action='get' type='Part' id='{0}' select='id'>
+                                    <Relationships><Item action='get' type='HC Part Validation'></Item></Relationships>
+                                </Item>>
+                            </AML>";
+        amlQuery = String.Format(amlQuery,id);
+        Item queryResult = Inn.applyAML(amlQuery);
+        
+        Item validations = queryResult.getItemsByXPath("//Item[@type='HC Validation']");
+        
+        for (int i = 0; i<validations.getItemCount();i++) {
+            string validationType = validations.getItemByIndex(i).getProperty("validation_type","");
+            if (validationType == "Error") {
+                // Has error increase result count
+                result += 1; 
+                if (result == 1) {
+                    // Store the first error message descrition. To give some valubalbe info to the user in the error message. (E.g. when not working in the std web client)
+                    FirstErrorMessageDescription = validations.getItemByIndex(i).getProperty("description","");
+                }
+            }
+        }
+        
+        return result;
+    }
+
+}
+// END CLASS
+
+// Create and get access to Innovator object and provide help methods.
+static class Utils
+{
+
+    private const String InnovatorObjectUID = "HC_PartBeforePromote_InnovatorObject";
+    private const String InnovatorCCOUID = "HC_PartBeforePromote_InnovatorCCO";
+
+    public static void InitializeForRequest(Innovator innovator, Aras.Server.Core.CallContext CCO)
+    {
+        HttpContext.Current.Items[InnovatorObjectUID] = innovator;
+        HttpContext.Current.Items[InnovatorCCOUID] = CCO;
+    }
+
+    /// <summary>
+    /// Get instance of Innovator object
+    /// </summary>
+    public static Innovator Innovator
+    {
+        get
+        {
+            return ((Innovator)HttpContext.Current.Items[InnovatorObjectUID]);
+        }
+    }
+
+    public static Aras.Server.Core.CallContext CCO
+    {
+        get
+        {
+            return ((Aras.Server.Core.CallContext)HttpContext.Current.Items[InnovatorCCOUID]);
+        }
+    }
+
+}
+//End Utils Class
+
+class fin
+{
+
+    void method()
+    {]]></method_code>
+  <method_type>C#</method_type>
+  <name>HC_PartBeforePromote</name>
+ </Item>
+</AML>

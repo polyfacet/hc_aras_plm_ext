@@ -1,0 +1,22 @@
+<AML>
+	<Item type="Field" id="0B9D512688F84EEEB362070A8468EA5B" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<div id="hcvalidation" width="200" height="80"></div>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>4736</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>90</x>
+      <y>15</y>
+      <name>validation</name>
+     </Item>
+</AML>

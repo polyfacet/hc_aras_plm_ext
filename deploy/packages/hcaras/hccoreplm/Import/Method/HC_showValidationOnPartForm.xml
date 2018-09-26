@@ -1,0 +1,49 @@
+﻿<AML>
+ <Item type="Method" id="D30996B812234359B5C741D78B98ACAC" action="add">
+  <comments>Form function on Part.  Shows validation error/warnings</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// Used on Part form to show if there are validation error/warnings on Parts
+
+var state = this.document.thisItem.getProperty("state");  
+if (state) {
+
+    //if ("Preliminary" == state) {
+    
+	var id = this.document.thisItem.getID();
+	// Fetch validation data of the Part
+	var aml = "<AML><Item action='get' type='Part' id='" + id + "'><Relationships> <Item action='get' type='HC Part Validation'></Item></Relationships></Item></AML>";
+
+    // Hide the validation field by default or display it with Ok
+	var element = document.getElementsByName("validation")[0];
+	//element.style.display = "none";
+	var resultItem = top.aras.applyAML(aml);
+	
+	// Search the result query for Warnings/Errors
+	// If hit, display warning/error.
+	var desc = "Check validation tab";
+	var imageDir = "../Solutions/HilleConsultIt/images/";
+	var posWarning = resultItem.search("Warning");
+	var imgPath;
+	if (posWarning > 0) {
+		imgPath = imageDir + "Warning.png";
+	}
+	
+	var posError = resultItem.search("Error");
+	if (posError > 0) {
+	    imgPath = imageDir + "Error.png";
+	}
+
+    // If no errors or warning show OK.
+    if (posError <= 0 && posWarning <= 0) {
+        imgPath = imageDir + "OK.png";
+        desc = "";        
+    }
+    
+	element.innerHTML = "<img src='" + imgPath +"'></img>" + desc;	
+	element.style.display = "inline";
+    //}
+}]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>HC_showValidationOnPartForm</name>
+ </Item>
+</AML>

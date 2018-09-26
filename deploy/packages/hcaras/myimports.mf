@@ -2,4 +2,7 @@
   <package name="se.hilleconsultit.hccore" path="hccore\Import">
     <dependson name="com.aras.innovator.solution.PLM" />
   </package>
+  <package name="se.hilleconsultit.hccoreplm" path="hccoreplm\Import">
+    <dependson name="se.hilleconsultit.hccore" />
+  </package>
 </imports>

@@ -1,0 +1,209 @@
+﻿<AML>
+ <Item type="Method" id="C835F44B2BD345E2823D035569A14E36" action="add">
+  <comments>Get Validations for Part</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[' MethodTemplateName=VBMain;
+
+Dim Inn As Innovator
+Private Const HC_VALIDATION_TYPE = "HC Validation"
+Private Const HC_PART_VALIDATION_TYPE = "HC Part Validation"
+
+Function Main() As Item
+    Inn = Me.getInnovator
+    'System.Diagnostics.Debugger.Break()
+    Dim sourceId As String = Me.getProperty("source_id")
+    Dim fullPartItem As Item = GetPartItem(sourceId)
+
+    If fullPartItem.isError() Then
+        ' New
+        Return Me
+    End If
+
+    Dim validations As List(Of Validation)
+    validations = GetPartValidations(fullPartItem)
+
+    If validations.Count = 0 Then
+        ' Create all ok validation.
+        validations.Add(New Validation(Validation.ValidationType.Ok, "Everything looks good!"))
+    End If
+
+    Dim utils As New ValidationUtils(Inn)
+    Dim result As Item = utils.ConvertValidationToItemResult(validations, sourceId)
+
+    Return result
+
+End Function
+
+Private Function GetPartItem(partId As String)
+    ' NOTE: Expand after requirements
+    Dim amlExpandedPart As String = "<AML><Item action='get' type='Part' id='{0}'><Relationships><Item action='get' type='Part BOM'></Item></Relationships></Item></AML>"
+    amlExpandedPart = String.Format(amlExpandedPart, partId)
+    Dim part As Item = Inn.applyAML(amlExpandedPart)
+    Return part
+End Function
+
+Private Function GetPartValidations(inputItem As Item) As List(Of Validation)
+    ' TODO: Implement business logic
+    Dim validations As New List(Of Validation)
+
+    ' Example validations:
+    ' Validate that name is set: Error
+    ' Validate that child is not released: Warning
+
+    If inputItem.getProperty("name", "") = "" Then
+        Dim validation As New Validation(Validation.ValidationType.Error, "Name is not set")
+        validations.Add(validation)
+    End If
+
+
+    Dim partBoms As Item = inputItem.getItemsByXPath("//Item[@type='Part BOM']")
+    For i As Integer = 0 To partBoms.getItemCount() - 1
+        Dim partBom As Item = partBoms.getItemByIndex(i)
+        Dim childPart As Item = partBom.getRelatedItem
+        Dim childState As String = childPart.getProperty("state", "")
+        If childState <> "Released" Then
+            ' Add warning
+            Dim validation As New Validation(Validation.ValidationType.Warning, childPart, "Child is not Released")
+            validations.Add(validation)
+        End If
+    Next
+
+
+    Return validations
+End Function
+
+''' <summary>
+''' Generic Util class for handling validations
+''' </summary>
+Public Class ValidationUtils
+
+
+    Dim Inn As Innovator
+    Public Sub New(inn As Innovator)
+        Me.Inn = inn
+    End Sub
+
+
+    Public Function ConvertValidationToItemResult(ByVal validations As List(Of Validation), ByVal sourceId As String) As Item
+        Dim res As Item = Inn.newItem("Dummy")
+        Dim validationItems As Item = Nothing
+        Dim i As Integer = 0
+        For Each validation As Validation In validations
+            i += 1
+            Dim validationItem As Item = ConvertValidationToItem(validation)
+            If validationItems Is Nothing Then
+                validationItems = validationItem
+            Else
+                validationItems.appendItem(validationItem)
+            End If
+
+            'Dim rel As Item = Inn.newItem(HC_PART_VALIDATION_TYPE)
+            Dim rel As Item = Inn.newItem(HC_VALIDATION_TYPE)
+            rel.setID(Inn.getNewID())
+            rel.setAttribute("typeId", "dummy")
+            rel.setPropertyItem("related_id", validationItem)
+            rel.removeAttribute("isNew")
+            rel.removeAttribute("isTemp")
+            ' rel.setProperty("item_number", validation.ItemNumber)
+            ' rel.setProperty("description", validation.Description)
+            ' If validation.Item IsNot Nothing Then
+            '     rel.setProperty("item", validation.Item.getID())
+            '     rel.setPropertyAttribute("item", "keyed_name", validation.ItemNumber)
+            ' End If
+
+            rel.setProperty("source_id", sourceId)
+            res.appendItem(rel)
+        Next
+
+        If res.getItemCount() > 1 Then
+            res.removeItem(res.getItemByIndex(0))
+            Dim res1 As Item = Inn.newResult("")
+            res1.dom.SelectSingleNode("//Result").InnerXml = res.dom.SelectSingleNode("//AML").InnerXml
+            Return res1
+        Else
+            Return res
+        End If
+    End Function
+
+
+    Private Function ConvertValidationToItem(ByVal validation As Validation) As Item
+        Dim validationItem As Item = Inn.newItem(HC_VALIDATION_TYPE, "add")
+        validationItem.setProperty("validation_type", validation.Type.ToString())
+        validationItem.setProperty("image", validation.ImagePath)
+        validationItem.setProperty("description", validation.Description)
+        validationItem.setProperty("long_description", validation.LongDescription)
+        validationItem.setProperty("item_number", validation.ItemNumber)
+        If validation.Item IsNot Nothing Then
+            validationItem.setProperty("item_type", validation.Item.[getType]())
+            validationItem.setProperty("item", validation.Item.getID())
+            validationItem.setPropertyAttribute("item", "keyed_name", validation.ItemNumber)
+        End If
+
+        validationItem.removeAttribute("isNew")
+        validationItem.removeAttribute("isTemp")
+        validationItem.apply()
+        Return validationItem
+    End Function
+
+
+
+End Class
+
+Public Class Validation
+
+    Public Enum ValidationType
+        [Error]
+        Warning
+        Info
+        Ok
+    End Enum
+
+    Private Const BASE_PATH As String = "..\Solutions\HilleConsultIt\images\"
+
+    Private imagePathField As String = String.Empty
+
+    Public Sub New(ByVal validationType As ValidationType, ByVal item As Item, ByVal description As String)
+        Me.Type = validationType
+        Me.Item = item
+        Me.Description = description
+        If Not item Is Nothing Then
+            Me.ItemNumber = item.getProperty("item_number", "")
+        End If
+    End Sub
+
+    Public Sub New(ByVal validationType As ValidationType, ByVal description As String)
+        Me.Type = validationType
+        Me.Description = description
+    End Sub
+
+    Public Property Type As ValidationType
+    Public Property Description As String
+    Public Property ItemNumber As String
+    Public Property LongDescription As String
+    Public Property Item As Item
+
+    Public Property ImagePath As String
+        Get
+            imagePathField = BASE_PATH & Me.Type.ToString() & ".png"
+            Return imagePathField
+        End Get
+
+        Set(ByVal value As String)
+            imagePathField = value
+        End Set
+    End Property
+End Class
+
+
+
+
+
+
+
+
+
+]]></method_code>
+  <method_type>VB</method_type>
+  <name>HC_PartGetValidations</name>
+ </Item>
+</AML>
