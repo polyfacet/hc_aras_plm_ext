@@ -1,0 +1,48 @@
+<AML>
+
+	<!-- Add Batman test user -->
+	<Item type="User" action="merge" typeId="45E899CD2859442982EB22BB2DF683E5" id="7F6105567D5B4C585EB8323829673647">
+		<first_name>Bruce</first_name>
+		<last_name>Wayne</last_name>
+		<login_name>Batman</login_name>
+		<logon_enabled>1</logon_enabled>
+		<password>098f6bcd4621d373cade4e832627b4f6</password>
+		<confirm_password>098f6bcd4621d373cade4e832627b4f6</confirm_password>
+		<picture>vault:///?fileId=F10FAF4D82DC48AB8E7629940EF13324</picture>
+	</Item>
+
+	<!-- Add Batman to All Employees -->
+	<Item type="Identity" id="B32BD81D1AD04207BF1E61E39A4E0E13" action="merge">
+		<is_alias>0</is_alias>
+		<name>All Employees</name>
+		<Relationships>
+			<Item type="Member" action="add">
+				<related_id>
+					<Item action="get" type="Identity">
+						<description>Batman</description>
+					</Item>
+				</related_id>
+				<source_id >B32BD81D1AD04207BF1E61E39A4E0E13</source_id>
+			</Item>
+		</Relationships>
+	</Item>
+
+	<!-- Add Batman to Component Engineering grp -->
+	<Item type="Identity" id="5F9C887B3B224E358EB257BE51B18949" action="merge">
+		<is_alias>0</is_alias>
+		<name>Component Engineering</name>
+		<Relationships>
+			<Item type="Member" action="add">
+				<related_id>
+					<Item action="get" type="Identity">
+						<description>Batman</description>
+					</Item>
+				</related_id>
+				<source_id >5F9C887B3B224E358EB257BE51B18949</source_id>
+			</Item>
+		</Relationships>
+	</Item>
+
+
+</AML>
+

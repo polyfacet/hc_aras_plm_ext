@@ -1,0 +1,4 @@
+<imports>
+	<!--  Content -->
+	<package name="com.hilleconsultit.hccoreplm.demousers" path="DemoUsers"/>	
+</imports>
