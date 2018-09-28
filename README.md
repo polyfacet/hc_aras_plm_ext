@@ -6,9 +6,9 @@ Purpose to include some more or less generic and valuable feature on top of the 
 
 Features in short:
 * Part Validation concept
-* A better BOM Compare (Not implemented)
+* Part Property coloring in grid
 * Part variant creation (Not implemented)
-* Property coloring (Not implemented)
+* A better BOM Compare (Not implemented)
 * Open in background (Not implemented)
 * Tree Grid View example (Not implemented)
 * Extended API:
@@ -43,7 +43,8 @@ Features in short:
  1. Login to Innovator
  2. Navigate to the Part ItemType
  3. Create a new part with no name set.
- 4. Notice the validation error in Form and the validation tab.
- 5. Customize rules by editing Method HC_PartGetValidations
+ 4. Notice the validation error in Form and the validation tab and the Parts grid colors
+ 5. Customize rules by editing Method HC_PartGetValidations and HC_PartSetGridCss
+ 
  
  Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI

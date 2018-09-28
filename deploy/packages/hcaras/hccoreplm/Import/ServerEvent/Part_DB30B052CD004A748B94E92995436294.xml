@@ -1,0 +1,14 @@
+<AML>
+   <Item type="Server Event" id="DB30B052CD004A748B94E92995436294" action="add">
+    <event_version>version_1</event_version>
+    <is_required>0</is_required>
+    <related_id keyed_name="HC_PartSetGridCss" type="Method">
+     <Item type="Method" action="get" select="id">
+      <name>HC_PartSetGridCss</name>
+     </Item>
+    </related_id>
+    <server_event>onAfterGet</server_event>
+    <sort_order>100257</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+</AML>

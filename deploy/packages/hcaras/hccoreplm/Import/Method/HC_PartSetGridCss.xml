@@ -1,0 +1,86 @@
+﻿<AML>
+ <Item type="Method" id="B971EAD41385435780D691DE981DDACA" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[' MethodTemplateName=VBMain;
+
+'' Setting colors in grid on Part properties
+Private CSS_COLOR_BASE = ".{0} {{ background-color: {1}  }}"
+
+' START your ccs definition
+' List properties to apply css to
+Private MyPropertyList As New List(Of String)(New String() {"state", "classification"})
+
+' Define colors by propertyName and corresponing value
+Class MyCssRules
+    Public Shared Function GetBackgroundColor(propertyName As String, propertyValue As String) As String
+        Dim bgColor As String = String.Empty
+        Select Case propertyName 
+            ' State coloring
+            Case "state"
+                Select Case propertyValue
+                    Case "Preliminary","In Review" 
+                        bgColor = "#FFFFBB" 'light yellow
+                    Case "Released" 
+                        bgColor = "#99CC33" 'light green
+                    Case "Superseded","Obsolete" 
+                        bgColor = "#FFBBBB" 'light red
+                    End Select
+            ' Classification/Type coloring
+            Case "classification"
+                Select Case propertyValue
+                    Case "Component" 
+                        bgColor = "#AAD4FF" ' "#77CCFF" 'light blue
+                    Case "Assembly"
+                        bgColor = "#0099FF" ' "#668AFF" 'darker light blue
+                    Case "Software"
+                        bgColor = "#fcce6a" ' Light orange
+                    Case Else
+                        bgColor = "#FFBBBB" 'light red
+                End Select
+        End Select
+        Return bgColor
+    End Function
+End Class
+' END your ccs definition
+
+
+' Main method
+Function Main() As Item
+    Dim i As Integer
+    For i=0 To Me.getItemCount()-1
+
+      ' Get the current item
+      Dim thisItem As Item = Me.getItemByIndex(i)
+
+      ' Determine and update css      
+      Dim cssList As List(Of String) = GetCss(thisItem)
+      Dim cssResult As String = String.Empty
+      For Each css As String In cssList 
+        cssResult &= css
+      Next
+      thisItem.setProperty("css",cssResult)
+      
+    Next i
+    Return Me
+End Function
+
+' Gets css for an item
+Private Function GetCss(item As Item) As List(Of String)
+    Dim cssList As New List(Of String)
+    For Each propertyName As String in MyPropertyList
+        Dim cssValue As String = MyCssRules.GetBackgroundColor(propertyName,item.getProperty(propertyName))
+        If Not String.IsNullOrEmpty(cssValue) Then
+            Dim css As String = String.Format(CSS_COLOR_BASE,propertyName, cssValue)
+            cssList.Add(css)
+        End If
+    Next
+    Return cssList
+End Function
+
+
+
+]]></method_code>
+  <method_type>VB</method_type>
+  <name>HC_PartSetGridCss</name>
+ </Item>
+</AML>
