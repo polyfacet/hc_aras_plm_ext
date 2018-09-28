@@ -2,7 +2,7 @@
 Extended functionality of Aras Innovator Out-Of-The-Box PLM package.
 Developed on R11SP12 and R11SP9
 
-Purpose to include some more or less generic and valuable feature on top of the Aras Innovotr Out-Of-The-Box PLM package
+Purpose to include some more or less generic and valuable feature on top of the Aras Innovotor Out-Of-The-Box PLM package
 Which can be pulled and resused as needed.
 
 Features in short:
@@ -22,7 +22,7 @@ Features in short:
  Always back up your code tree and database before applying an import package or code tree patch!
  
  ### Pre-requisites
- 1. Aras Innovator installed
+ 1. Aras Innovator installed (Tested in: R11SP9 , R11SP12, R11SP12)
  2. Aras Package Import tool
  
  ### Install steps
