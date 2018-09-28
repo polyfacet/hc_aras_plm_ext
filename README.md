@@ -44,6 +44,6 @@ Features in short:
  1. Login to Innovator
  2. Navigate to the Part ItemType
  3. Create a new part with no name set.
- 4. Notice the validation error in From and the Validation tab.
+ 4. Notice the validation error in Form and the validation tab.
  
  Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI
