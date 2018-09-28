@@ -45,5 +45,6 @@ Features in short:
  2. Navigate to the Part ItemType
  3. Create a new part with no name set.
  4. Notice the validation error in Form and the validation tab.
+ 5. Customize rules by editing Method HC_PartGetValidations
  
  Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI
