@@ -2,8 +2,7 @@
 Extended functionality of Aras Innovator Out-Of-The-Box PLM package.
 Developed on R11SP12 and R11SP9
 
-Purpose to include some more or less generic and valuable feature on top of the Aras Innovotor Out-Of-The-Box PLM package
-Which can be pulled and resused as needed.
+Purpose to include some more or less generic and valuable feature on top of the Aras Innovotor Out-Of-The-Box PLM package.
 
 Features in short:
 * Part Validation concept
