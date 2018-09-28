@@ -1,0 +1,24 @@
+<AML>
+	<Item type="Field" id="6BD2D5795ED34635B7A4E89F5410A22C" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>item</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>1</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Copied From</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="hc_copied_from" type="Property">67C8DE18C1FA4643B4A42444D8A43C72</propertytype_id>
+      <sort_order>4864</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>95128</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>15</x>
+      <y>320</y>
+      <name>hc_copied_from</name>
+     </Item>
+</AML>

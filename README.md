@@ -7,7 +7,7 @@ Purpose to include some more or less generic and valuable feature on top of the 
 Features in short:
 * Part Validation concept
 * Part Property coloring in grid
-* Part variant creation (Not implemented)
+* Part variant creation
 * A better BOM Compare (Not implemented)
 * Open in background (Not implemented)
 * Tree Grid View example (Not implemented)
@@ -44,7 +44,8 @@ Features in short:
  2. Navigate to the Part ItemType
  3. Create a new part with no name set.
  4. Notice the validation error in Form and the validation tab and the Parts grid colors
- 5. Customize rules by editing Method HC_PartGetValidations and HC_PartSetGridCss
+ 5. Select Action -> Create Variant on an existing Part. Notice the new property/field "Copied From" displayed on Part/Part form.
+ 6. Customize rules by editing Method HC_PartGetValidations, HC_PartSetGridCss and HC_CreatePartClone_Generic
  
  
  Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI

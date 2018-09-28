@@ -1,0 +1,15 @@
+﻿<AML>
+ <Item type="Action" id="7D89E3424C81423CBB9E431C58BCE890" action="add">
+  <item_query />
+  <label xml:lang="en">Create Variant</label>
+  <location>client</location>
+  <method keyed_name="HC_createPartClone" type="Method">
+   <Item type="Method" action="get" select="id">
+    <name>HC_createPartClone</name>
+   </Item>
+  </method>
+  <target>none</target>
+  <type>item</type>
+  <name>HC Create Part Clone</name>
+ </Item>
+</AML>

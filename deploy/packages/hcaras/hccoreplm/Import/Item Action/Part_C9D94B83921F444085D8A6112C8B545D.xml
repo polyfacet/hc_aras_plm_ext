@@ -1,0 +1,7 @@
+<AML>
+   <Item type="Item Action" id="C9D94B83921F444085D8A6112C8B545D" action="add">
+    <related_id keyed_name="HC Create Part Clone" type="Action">7D89E3424C81423CBB9E431C58BCE890</related_id>
+    <sort_order>1536</sort_order>
+    <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+   </Item>
+</AML>

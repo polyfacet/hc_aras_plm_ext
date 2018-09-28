@@ -1,0 +1,36 @@
+﻿<AML>
+ <Item type="Method" id="940EE3B290CE43B599C67E4EB777BC84" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//Create a new variant of Part
+
+var serverMethod = "HC_CreatePartClone_Generic";
+
+if (top.aras.isTempEx(this.node) || top.aras.isDirtyEx(this.node) || top.aras.isNew(this.node)) {
+    var errorMsg = "";
+ 	errorMsg = "Part must be saved and unlocked!";
+ 	top.aras.AlertError(errorMsg);
+ 	return;
+ }
+
+var inn = this.getInnovator();
+var partId = this.getID();
+var itemType = this.getType();
+
+var newItem = inn.newItem(itemType,"clone");
+newItem.setAttribute("basedOnId",partId);
+
+var clonedItem = inn.applyMethod(serverMethod, newItem)
+if (clonedItem.isError()) {
+    var errorMsg = clonedItem.getErrorString();
+    top.aras.AlertError(errorMsg);
+    return;
+}
+                        
+// Show the new part in a new window
+top.aras.uiShowItemEx(clonedItem.node, 'tab view');
+return clonedItem;    
+]]></method_code>
+  <method_type>JavaScript</method_type>
+  <name>HC_createPartClone</name>
+ </Item>
+</AML>

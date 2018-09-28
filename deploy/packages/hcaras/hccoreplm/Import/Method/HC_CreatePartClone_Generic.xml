@@ -1,0 +1,46 @@
+﻿<AML>
+ <Item type="Method" id="AD744D24EC4A47989B0E045A926A9FA2" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[//Creates a new Part from an existing Part
+
+Innovator inn = this.getInnovator();
+string ITEM_TYPE = "Part";
+
+// Read input
+Item inputItem = this.getItemsByXPath("//Item/Item").getItemByIndex(0);
+string copiedFromId = inputItem.getAttribute("basedOnId","");
+
+Aras.Server.Security.Identity plmIdentity = Aras.Server.Security.Identity.GetByName("Super User");
+bool PermissionWasSet = Aras.Server.Security.Permissions.GrantIdentity(plmIdentity);
+
+try {
+
+    // Copy to new Item
+    Item clonedItem = inn.newItem(ITEM_TYPE, "copyAsNew");
+    clonedItem.setID(copiedFromId);
+    clonedItem = clonedItem.apply();
+    
+    // Set specific values for clone
+    clonedItem.setAction("update");
+    // TODO: Make own customizations
+    clonedItem.setProperty("hc_copied_from", copiedFromId);
+
+    clonedItem = clonedItem.apply();
+    
+    //Reset access on Part
+    string amlResetAccess = @"<AML>
+                            <Item action='resetItemAccess' type='{0}' id='{1}'></Item>
+                            </AML>";
+    amlResetAccess = String.Format(amlResetAccess, ITEM_TYPE,clonedItem.getID());
+    inn.applyAML(amlResetAccess);
+
+    return clonedItem;
+}
+finally {
+    if (PermissionWasSet) Aras.Server.Security.Permissions.RevokeIdentity(plmIdentity);    
+}
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>HC_CreatePartClone_Generic</name>
+ </Item>
+</AML>
