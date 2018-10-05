@@ -1,0 +1,114 @@
+<AML>
+     <Item type="Field" id="3AB862A9139F4178A09AD1EB50648C27" action="add">
+      <bg_color>#ffffff</bg_color>
+      <border_width>0</border_width>
+      <container>Food Properties</container>
+      <display_length_unit>px</display_length_unit>
+      <field_type>checkbox</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Gluten Free</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="is_gluten_free" type="Property">B2B1BC67EAC7406F87100A6363AB1411</propertytype_id>
+      <sort_order>4864</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>95256</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>756</x>
+      <y>56</y>
+      <name>is_gluten_free</name>
+     </Item>
+     <Item type="Field" id="9FE1AFE18EB34912A4B0E962E0FBAE96" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>checkbox</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Lactose Free</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="is_lactose_free" type="Property">12DF351CCD2645D18FA60A0180F2A47C</propertytype_id>
+      <sort_order>4992</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>95384</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>756</x>
+      <y>94</y>
+      <name>is_lactose_free</name>
+     </Item>
+     <Item type="Field" id="302D65A01414454298B5631D6BE9F7FF" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>checkbox</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Sales Item</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="is_sales_item" type="Property">E77380E6B30B4C21A0DEE63153949B97</propertytype_id>
+      <sort_order>5120</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>95512</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>202</x>
+      <y>211</y>
+      <name>is_sales_item</name>
+     </Item>
+     <Item type="Field" id="8B7E93DFA7FD41F88979E6D63AB82874" action="add">
+      <container>Food Properties</container>
+      <display_length_unit>px</display_length_unit>
+      <field_type>checkbox</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Vegeterian</label>
+      <label_position>top</label_position>
+      <legend xml:lang="en">Food Properties</legend>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="is_vegeterian" type="Property">73BA8DBD53A04B99970621786A6DD321</propertytype_id>
+      <sort_order>4736</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>95128</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>756</x>
+      <y>5</y>
+      <name>is_vegeterian</name>
+     </Item>
+     <Item type="Field" id="4752DBA363C94FD68FAFCA698F29C8A3" action="add">
+      <display_length_unit>px</display_length_unit>
+      <field_type>checkbox</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label xml:lang="en">Ecologic</label>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <propertytype_id keyed_name="is_ecologic" type="Property">E3051DB495254A778BC4F0FFE3DF0C85</propertytype_id>
+      <sort_order>4865</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_index>95257</tab_index>
+      <tab_stop>1</tab_stop>
+      <x>756</x>
+      <y>134</y>
+      <name>is_ecologic</name>
+     </Item>
+</AML>

@@ -1,0 +1,116 @@
+<AML>
+
+	<Item type="ItemType" id="4F1AC04A2B484F3ABA4E20DB63808A88" action="edit">
+		<class_structure><![CDATA[<class id="4F1AC04A2B484F3ABA4E20DB63808A88"><class name="Component" id="0D83A764A1EA0CB66E34980C4B50F7E7" /><class name="Assembly" id="512FF7893DBCD6D1AC1F55B87A480934" /><class name="Material" id="64801C21172EEEB61692B77CB5E0ABF1" /></class>]]></class_structure>
+		<Relationships>
+			<Item type="Property" id="879EAA0579BD4120BF3DF324ABA7A341" action="add">
+				<column_alignment>left</column_alignment>
+				<column_width>120</column_width>
+				<data_source keyed_name="HC Part Number">08B3977B7F1543D5A6142FB5EF199EFA</data_source>
+				<data_type>sequence</data_type>
+				<is_hidden>0</is_hidden>
+				<is_hidden2>0</is_hidden2>
+				<is_indexed>1</is_indexed>
+				<is_keyed>1</is_keyed>
+				<is_multi_valued>0</is_multi_valued>
+				<is_required>0</is_required>
+				<keyed_name_order>1</keyed_name_order>
+				<label xml:lang="en">Part Number</label>
+				<order_by>1</order_by>
+				<range_inclusive>0</range_inclusive>
+				<readonly>0</readonly>
+				<sort_order>128</sort_order>
+				<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+				<track_history>0</track_history>
+				<name>item_number</name>
+		   </Item>
+		</Relationships>
+	</Item>
+	
+	   <Item type="Property" id="B2B1BC67EAC7406F87100A6363AB1411" action="add">
+		<column_alignment>left</column_alignment>
+		<data_type>boolean</data_type>
+		<is_hidden>0</is_hidden>
+		<is_hidden2>0</is_hidden2>
+		<is_indexed>0</is_indexed>
+		<is_keyed>0</is_keyed>
+		<is_multi_valued>0</is_multi_valued>
+		<is_required>0</is_required>
+		<label xml:lang="en">Gluten Free</label>
+		<range_inclusive>0</range_inclusive>
+		<readonly>0</readonly>
+		<sort_order>95256</sort_order>
+		<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+		<track_history>0</track_history>
+		<name>is_gluten_free</name>
+	   </Item>
+	   <Item type="Property" id="12DF351CCD2645D18FA60A0180F2A47C" action="add">
+		<column_alignment>left</column_alignment>
+		<data_type>boolean</data_type>
+		<is_hidden>0</is_hidden>
+		<is_hidden2>0</is_hidden2>
+		<is_indexed>0</is_indexed>
+		<is_keyed>0</is_keyed>
+		<is_multi_valued>0</is_multi_valued>
+		<is_required>0</is_required>
+		<label xml:lang="en">Lactose Free</label>
+		<range_inclusive>0</range_inclusive>
+		<readonly>0</readonly>
+		<sort_order>95384</sort_order>
+		<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+		<track_history>0</track_history>
+		<name>is_lactose_free</name>
+	   </Item>
+	   <Item type="Property" id="E77380E6B30B4C21A0DEE63153949B97" action="add">
+		<column_alignment>left</column_alignment>
+		<data_type>boolean</data_type>
+		<is_hidden>0</is_hidden>
+		<is_hidden2>0</is_hidden2>
+		<is_indexed>0</is_indexed>
+		<is_keyed>0</is_keyed>
+		<is_multi_valued>0</is_multi_valued>
+		<is_required>0</is_required>
+		<label xml:lang="en">Sales Item</label>
+		<range_inclusive>0</range_inclusive>
+		<readonly>0</readonly>
+		<sort_order>95512</sort_order>
+		<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+		<track_history>0</track_history>
+		<name>is_sales_item</name>
+	   </Item>
+	   <Item type="Property" id="73BA8DBD53A04B99970621786A6DD321" action="add">
+		<column_alignment>left</column_alignment>
+		<data_type>boolean</data_type>
+		<is_hidden>0</is_hidden>
+		<is_hidden2>0</is_hidden2>
+		<is_indexed>0</is_indexed>
+		<is_keyed>0</is_keyed>
+		<is_multi_valued>0</is_multi_valued>
+		<is_required>0</is_required>
+		<label xml:lang="en">Vegeterian</label>
+		<range_inclusive>0</range_inclusive>
+		<readonly>0</readonly>
+		<sort_order>95128</sort_order>
+		<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+		<track_history>0</track_history>
+		<name>is_vegeterian</name>
+	   </Item>
+	   <Item type="Property" id="E3051DB495254A778BC4F0FFE3DF0C85" action="add">
+		<column_alignment>left</column_alignment>
+		<data_type>boolean</data_type>
+		<is_hidden>0</is_hidden>
+		<is_hidden2>0</is_hidden2>
+		<is_indexed>0</is_indexed>
+		<is_keyed>0</is_keyed>
+		<is_multi_valued>0</is_multi_valued>
+		<is_required>0</is_required>
+		<label xml:lang="en">Ecologic</label>
+		<range_inclusive>0</range_inclusive>
+		<readonly>0</readonly>
+		<sort_order>95120</sort_order>
+		<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+		<track_history>0</track_history>
+		<name>is_ecologic</name>
+	   </Item>
+	
+</AML>

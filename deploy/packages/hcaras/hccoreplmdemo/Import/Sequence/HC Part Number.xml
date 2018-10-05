@@ -1,0 +1,7 @@
+﻿<AML>
+ <Item type="Sequence" id="08B3977B7F1543D5A6142FB5EF199EFA" action="add">
+  <initial_value>1000</initial_value>
+  <step>1</step>
+  <name>HC Part Number</name>
+ </Item>
+</AML>

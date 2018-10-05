@@ -1,0 +1,68 @@
+<AML>
+ <Item type="List" id="2BE5CDEBF2114CE88DEF9455ECAF785B" action="edit">
+  <description>Units of measure</description>
+  <name>Units</name>
+  <Relationships>
+   <Item type="Value" id="AE19A9932C654B63AB0F9821FC3822A9" action="delete">
+    <label xml:lang="en">EA</label>
+    <sort_order>1</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>EA</value>
+   </Item>
+   <Item type="Value" id="AB516BF9CA4045EDAC94E4F8824E38C5" action="delete">
+    <label xml:lang="en">IN</label>
+    <sort_order>2</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>IN</value>
+   </Item>
+   <Item type="Value" id="C77CE500A78141278194F0993BAF0594" action="delete">
+    <label xml:lang="en">FT</label>
+    <sort_order>3</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>FT</value>
+   </Item>
+   <Item type="Value" id="E0DFA2DDFB7B490C88F82666FE21FEFB" action="delete">
+    <label xml:lang="en">MM</label>
+    <sort_order>4</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>MM</value>
+   </Item>
+   <Item type="Value" id="3E955C0F928343DD8F22D8461AC835F2" action="delete">
+    <label xml:lang="en">CM</label>
+    <sort_order>5</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>CM</value>
+   </Item>
+   <Item type="Value" id="E5846BC98FEE4ED2AF738331822C7E23" action="delete">
+    <label xml:lang="en">M</label>
+    <sort_order>6</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>M</value>
+   </Item>
+   <Item type="Value" id="6C797FA38B6B4DE78A804D23A9B98E1A" action="add">
+    <label xml:lang="en">g</label>
+    <sort_order>256</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>g</value>
+   </Item>
+   <Item type="Value" id="31867566FBAD455EA79E8A7EB3426113" action="add">
+    <label xml:lang="en">cl</label>
+    <sort_order>260</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>cl</value>
+   </Item>
+   <Item type="Value" id="A8E6FC3D89E1448FB212FE82AF57920F" action="add">
+    <label xml:lang="en">pcs</label>
+    <sort_order>300</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>pcs</value>
+   </Item>
+   <Item type="Value" id="8D67BA7F363540E6A30B882AC687099F" action="add">
+    <label xml:lang="en">m</label>
+    <sort_order>384</sort_order>
+    <source_id keyed_name="Units" type="List">2BE5CDEBF2114CE88DEF9455ECAF785B</source_id>
+    <value>m</value>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>
