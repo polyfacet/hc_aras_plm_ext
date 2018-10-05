@@ -1,0 +1,259 @@
+<AMLS>
+	<AML>
+		<Item type='Part' id='821658B3070E48B398F8B1708ED4DE73' action='merge'> 
+			<item_number>P0001</item_number>
+			<classification>Material</classification>
+			<name>Cucumber</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='90371F51844445BF89675A5307EA30FD' action='merge'> 
+			<item_number>P0002</item_number>
+			<classification>Material</classification>
+			<name>Tomato</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>pcs</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='37B855F4EFD74AD6ACDAD44347E827F7' action='merge'> 
+			<item_number>P0003</item_number>
+			<classification>Material</classification>
+			<name>Iceberg Lettuce</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='EE0EE7EDFCAC415C9399DB43CB22AC68' action='merge'> 
+			<item_number>P0004</item_number>
+			<classification>Material</classification>
+			<name>Romaine Lettuce</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='1A10504998534FFEBBE0D2B9AD506CFB' action='merge'> 
+			<item_number>P0005</item_number>
+			<classification>Material</classification>
+			<name>Penne</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>0</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='759E9535B2194F60BAB7318AC65467C1' action='merge'> 
+			<item_number>P0006</item_number>
+			<classification>Material</classification>
+			<name>Cheese (Prästost)</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>0</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='731878DA3F104DEAAD2B864F79D09F3C' action='merge'> 
+			<item_number>P0007</item_number>
+			<classification>Material</classification>
+			<name>Egg</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>pcs</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='E7072FFD05974F158C28430AB7547001' action='merge'> 
+			<item_number>P0008</item_number>
+			<classification>Material</classification>
+			<name>Canola Oil</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>cl</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='E6E1EC1F222847AEB924A48CE6423B37' action='merge'> 
+			<item_number>P0009</item_number>
+			<classification>Material</classification>
+			<name>Garlic</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='DB0DDB7F8FD34305868C007C11EC2DAD' action='merge'> 
+			<item_number>P0010</item_number>
+			<classification>Material</classification>
+			<name>Sardine</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>0</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='73DCC3B505A444B294A8D4C6FB0734C0' action='merge'> 
+			<item_number>P0011</item_number>
+			<classification>Material</classification>
+			<name>Chicken</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>0</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='4A2EF70C43E642B886F313B94180003D' action='merge'> 
+			<item_number>P0012</item_number>
+			<classification>Material</classification>
+			<name>Salt</name>
+			<is_ecologic>1</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='1D7BE810B2FC4A39837AAF224209F23E' action='merge'> 
+			<item_number>P0013</item_number>
+			<classification>Material</classification>
+			<name>Pepper</name>
+			<is_ecologic>1</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='087BE4F3F35F4AB1BB397DF20B41A42C' action='merge'> 
+			<item_number>P0014</item_number>
+			<classification>Material</classification>
+			<name>Mustard Dijon</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='C03636CC098D44B8A3A1E782E3C03EE1' action='merge'> 
+			<item_number>P0015</item_number>
+			<classification>Material</classification>
+			<name>Lemon Juice</name>
+			<is_ecologic>1</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>cl</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='90651B51799B4446A1A9B17509ECDBB2' action='merge'> 
+			<item_number>P0016</item_number>
+			<classification>Material</classification>
+			<name>Cheese Parma</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part' id='F8C2661B90D9463F9D55F47544A5B84B' action='merge'> 
+			<item_number>P0017</item_number>
+			<classification>Material</classification>
+			<name>Caper</name>
+			<is_ecologic>0</is_ecologic>
+			<is_gluten_free>1</is_gluten_free>
+			<is_lactose_free>1</is_lactose_free>
+			<is_vegeterian>1</is_vegeterian>
+			<make_buy>Buy</make_buy>
+			<unit>g</unit>
+			<managed_by_id>A73B655731924CD0B027E4F4D5FCC0A9</managed_by_id>
+			<owned_by_id>A73B655731924CD0B027E4F4D5FCC0A9</owned_by_id>
+		</Item>
+	</AML>
+
+
+</AMLS>

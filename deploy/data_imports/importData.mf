@@ -1,4 +1,5 @@
 <imports>
 	<!--  Content -->
-	<package name="com.hilleconsultit.hccoreplm.demousers" path="DemoUsers"/>	
+	<!--<package name="com.hilleconsultit.hccoreplm.demousers" path="DemoUsers"/>	 -->
+	<package name="com.hilleconsultit.hccoreplm.demodata" path="Food\Parts"/>	
 </imports>

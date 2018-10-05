@@ -1,0 +1,30 @@
+<AMLS>
+	<AML>
+		<Item type='Part Goal' action='add'>  
+			<estimated_value>0.035</estimated_value>
+			<source_id>821658B3070E48B398F8B1708ED4DE73</source_id>
+			<goal>Cost</goal>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part Goal' action='add'>  
+			<estimated_value>4</estimated_value>
+			<source_id>90371F51844445BF89675A5307EA30FD</source_id>
+			<goal>Cost</goal>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part Goal' action='add'>  
+			<estimated_value>0.01</estimated_value>
+			<source_id>37B855F4EFD74AD6ACDAD44347E827F7</source_id>
+			<goal>Cost</goal>
+		</Item>
+	</AML>
+	<AML>
+		<Item type='Part Goal' action='add'>  
+			<estimated_value>0.015</estimated_value>
+			<source_id>EE0EE7EDFCAC415C9399DB43CB22AC68</source_id>
+			<goal>Cost</goal>
+		</Item>
+	</AML>
+</AMLS>
