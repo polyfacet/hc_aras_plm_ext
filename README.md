@@ -8,9 +8,10 @@ Features in short:
 * Part Validation concept
 * Part Property coloring in grid
 * Part variant creation
+* Tree Grid View example
 * A better BOM Compare (Not implemented)
 * Open in background (Not implemented)
-* Tree Grid View example (Not implemented)
+
 * Extended API:
    * History handling
    * Copy from Vault Server Side
