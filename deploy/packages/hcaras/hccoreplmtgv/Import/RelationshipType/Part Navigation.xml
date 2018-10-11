@@ -1,0 +1,65 @@
+﻿<AML>
+ <Item type="RelationshipType" id="0722E3BD6DCC4E628E43F32181BB799C" action="add" dependencyLevel="0">
+  <auto_search>1</auto_search>
+  <behavior>float</behavior>
+  <copy_permissions>0</copy_permissions>
+  <create_related>0</create_related>
+  <hide_in_all>0</hide_in_all>
+  <inc_rel_key_name>1</inc_rel_key_name>
+  <inc_related_key_name>1</inc_related_key_name>
+  <is_list_type>0</is_list_type>
+  <new_show_related>0</new_show_related>
+  <related_notnull>0</related_notnull>
+  <related_option>2</related_option>
+  <relationship_id keyed_name="Part Navigation" type="ItemType" name="Part Navigation">
+   <Item type="ItemType" id="6F311BCEFE23499B9E463DC0F3E255A7" action="add">
+    <allow_private_permission>1</allow_private_permission>
+    <auto_search>0</auto_search>
+    <enforce_discovery>0</enforce_discovery>
+    <hide_where_used>0</hide_where_used>
+    <implementation_type>table</implementation_type>
+    <instance_data>PART_NAVIGATION</instance_data>
+    <is_dependent>0</is_dependent>
+    <is_relationship>1</is_relationship>
+    <is_versionable>0</is_versionable>
+    <revisions keyed_name="Default" type="Revision">7FE395DD8B9F4E1090756A34B733D75E</revisions>
+    <show_parameters_tab>1</show_parameters_tab>
+    <structure_view>tabs off</structure_view>
+    <unlock_on_logout>0</unlock_on_logout>
+    <use_src_access>1</use_src_access>
+    <name>Part Navigation</name>
+    <Relationships>
+     <Item type="View" id="CD720B6E66604E3083912BCB4BBE61F2" action="add">
+      <client>js</client>
+      <related_id keyed_name="Part Navigation" type="Form">CDD5187AE095410FB9E19D01F8E1D141</related_id>
+      <role keyed_name="World" type="Identity">
+       <Item type="Identity" action="get" select="id">
+        <name>World</name>
+       </Item>
+      </role>
+      <show_ssvc>0</show_ssvc>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="Part Navigation" type="ItemType" name="Part Navigation">6F311BCEFE23499B9E463DC0F3E255A7</source_id>
+      <type>default</type>
+     </Item>
+    </Relationships>
+   </Item>
+  </relationship_id>
+  <sort_order>135</sort_order>
+  <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+  <name>Part Navigation</name>
+  <Relationships>
+   <Item type="Relationship View" id="66F61CE350CA4216AE93580C1248FAE2" action="add">
+    <parameters>'tgvdId=CFA3E41E48BB4284899A5D1D2C9BACB5&amp;startConditionProvider=ItemDefault({"id":"id"})'</parameters>
+    <related_id keyed_name="World" type="Identity">
+     <Item type="Identity" action="get" select="id">
+      <name>World</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="Part Navigation" type="RelationshipType">0722E3BD6DCC4E628E43F32181BB799C</source_id>
+    <start_page>../Modules/aras.innovator.TreeGridView/Views/MainPage.html</start_page>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

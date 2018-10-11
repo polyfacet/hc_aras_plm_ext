@@ -31,8 +31,8 @@ $tf*/
 dev
 deploy/log
 deploy/properties/env
-*.dll
 !main/server_extensions/References/*.dll
 !main/tools/*.exe
 !main/tools/*.dll
 !main/tools/*.pdb
+!deploy/webapp/Server/bin

@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<!-- (c) Copyright by Aras Corporation, 2004-2013. -->
+<html>
+<head>
+	<style type="text/css">
+		@import "../../../../public/styles/controls.css";	
+		@import "../../../../Solutions/PLM/styles/changes.css";
+	</style>
+	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=ScriptSet2"></script>
+	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=XmlDocument"></script>
+	<script type="text/javascript" src="../../../../Solutions/PLM/javascript/gridTools.js"></script>
+	<script type="text/javascript" src="../../../../Solutions/PLM/javascript/toolbarTools.js"></script>
+	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=/dojo.js"
+		data-dojo-config="isDebug: false, parseOnLoad: false, baseUrl:'../../../../javascript/dojo'"></script>
+</head>
+<body class="claro">
+	<script type="text/javascript">
+		var aras = parent.aras;
+		var toolbarReady = false,
+			gridReady = false,
+			isEditMode = false,
+			GridXmlLoadedFirstTime = true,
+			innovator = new aras.getMostTopWindowWithAras(window).Innovator(),
+			// Initierar hjälp class för Changes
+			bomcompareHelper = new BomComareHelper(),
+			grid,
+			toolbar,
+			baseItemId,
+			mainItem,
+			baseItem,
+			mainObjId,
+			onlyDisplayChanges,
+			cachedResult,
+			cachedBaseItemId,
+			compareBy;
+			onlyDisplayChanges = false;
+			compareBy = "Seq";
+
+		window.onresize = fixGridHeight;
+		window.addEventListener("DOMContentLoaded", function () {
+			// Skapa toolbar som kopplas till html toolbar_slot
+			clientControlsFactory.createControl("Aras.Client.Controls.Public.Toolbar", {id: "toolbar", connectId: "toolbar_slot"}, function (control) {
+				// toolbarApplet är varibel i toolbarTools.js
+				toolbarApplet = toolbar = control;
+				clientControlsFactory.on(toolbar, {
+					"onClick": onToolbarButtonClick
+				});
+				clientControlsFactory.on(toolbar, {
+					"onChange": onCompareIndexChange
+				});
+				loadToolbar();
+			});
+	
+			// Skapa grid som kopplas till html gridTD
+			clientControlsFactory.createControl("Aras.Client.Controls.Public.GridContainer", {connectId: "gridTD"}, function (control) {
+				gridApplet = grid = control;
+				// Koppla olika event
+				clientControlsFactory.on(grid, {
+					"gridXmlLoaded": function(isSuccess) {
+						if (GridXmlLoadedFirstTime) {
+							GridXmlLoadedFirstTime = false;
+						}
+					} /*,
+					"gridLinkClick": function(linkVal) {
+						if (linkVal.length) {
+							showItemForm(linkVal);
+						}
+					}
+					*/
+
+				});
+
+				loadGrid();
+				onGridLoad();
+				fixGridHeight();
+			});
+		});
+
+		function fixGridHeight() {
+			var el = document.getElementById("gridTD");
+			aras.fixLiquidContainerHeight(document, el);
+			el.style.height = window.innerHeight - toolbar_slot.offsetHeight + "px";
+		}
+		
+		function BomComareHelper() {
+		
+			this.CreateQuery = function ChangesHelper_CreateQuery(aml) {
+				var query = innovator.newItem();
+				query.loadAML(aml);
+				return query;
+			}
+		
+			this.GetBomCompare = function BomComareHelper_GetBomCompare(itemTypeName, compareItemID, inputBaseItemId){
+				var result;
+				var updateCache = true;
+				if (typeof cachedResult == 'undefined') {
+					// No cached result
+					//console.info("No cached result");
+					updateCache = true;
+				}
+				else {
+					//console.info("Use cached? " + inputBaseItemId + " == " + cachedBaseItemId);
+					if (inputBaseItemId == cachedBaseItemId) {
+						// Use the cached result
+						//updateCache = false;
+						// TODO: fix the caching. The cache/result is "destroyed"/trunctated when loading grid.
+						updateCache = true;
+					}
+					else {
+						
+						updateCache = true;
+					}
+				}
+				
+				if (updateCache) {
+					var aml = "" +
+						"<AML>" +
+						"	<Item type='" + itemTypeName + "' action='HC_PartBomCompare_Generic' id='" + compareItemID + "' baseId='" + inputBaseItemId + "' compareBy='" + compareBy + "'>" +
+						" </Item>" +
+						"</AML>";
+					console.info("Call Bom Compare on server");
+					result = this.GetItemsResult(aml);
+					if (typeof inputBaseItemId == 'undefined') {
+						// No explicit base input item was set, get i from result.
+						//cachedBaseItemId = result.selectSingleNode("//BaseItem/id").innerHTML;
+						var baseItemNode = result.getElementsByTagName("BaseItem")[0];
+						var baseItemidNode = baseItemNode.childNodes[0];
+						cachedBaseItemId = baseItemidNode.text;
+					} 
+					else {
+						cachedBaseItemId = inputBaseItemId;
+					}
+					//console.info("Setting cached id " + cachedBaseItemId);
+					cachedResult = result;
+				}
+				else {
+					//console.info("Using cached Bom Compare result");
+					result = cachedResult;
+				}
+				return result;;
+			}
+			
+			this.GetItemsResult = function BomComareHelper_GetItemsResult(aml) {
+				var amlDOM = aras.createXMLDocument();
+				amlDOM.loadXML(aml);
+
+				var res = aras.soapSend('ApplyMethod', amlDOM.xml);
+				if (res.getFaultCode() != 0) {
+					console.error(res.getFaultString());
+					aras.AlertError(res.getFaultString(), res.getFaultDetails(), res.getFaultActor());
+					return;
+				}
+				return res.getResult().ownerDocument;
+			}
+			
+			this.GetPartItem = function BomComareHelper_GetPartItem(arasId){
+				var part = innovator.getItemById("Part", arasId);
+				return part;
+			}
+		
+			this.GetItemPrimaryIdentifiers = function BomComareHelper_GetItemPrimaryIdentifiers(part){
+				var returnString = part.getProperty("item_number") + " Rev.: " + part.getProperty("major_rev") + " (generation: " + part.getProperty("generation") + ")";
+				return returnString;
+			}
+			
+			
+		}
+		
+
+		function loadGrid() {
+			// Get the part Object
+			var thisItem = aras.getMostTopWindowWithAras(window).document.getElementById("instance").contentDocument.thisItem;
+			mainItem = thisItem;
+			var objId = thisItem.getProperty("id");
+			mainObjId = objId;
+						
+			// Convert the Grid Data to DOM
+			var gridDom = aras.createXMLDocument();
+			gridDom.load(aras.getI18NXMLResource("BomChangesGrid.xml", aras.getScriptsURL() + "../Solutions/HilleConsultit/"));
+			//console.info("Comparing: " + objId);
+			//console.info("with: " + baseItemId);
+			
+			var res = bomcompareHelper.GetBomCompare("Part", objId, baseItemId);
+			//console.info(res.xml);
+			
+			// Set global baseItem
+			if (typeof baseItemId == 'undefined') {
+				var baseItemNode = res.getElementsByTagName("BaseItem")[0];
+				var baseItemidNode = baseItemNode.childNodes[0];
+				baseItemId = baseItemidNode.text;
+			}
+			baseItem = bomcompareHelper.GetPartItem(baseItemId);
+			
+			var rows = res.selectNodes("//tr");
+			// Update headers with base item info
+			var updatedXML = gridDom.xml.replace("{0}", mainItem.getProperty("item_number") + " Rev. " + mainItem.getProperty("major_rev"));
+			updatedXML = updatedXML.replace("{1}", baseItem.getProperty("item_number") + " Rev. " + baseItem.getProperty("major_rev"));
+			updatedXML = updatedXML.replace("{2}", " from " +  bomcompareHelper.GetItemPrimaryIdentifiers(baseItem));
+			
+			gridDom.loadXML(updatedXML);
+
+
+			for (var i = 0; i < rows.length; i++) {
+				gridDom.selectSingleNode("/table").appendChild(rows[i]);
+			}
+			
+			// Load to grid, using Aras Javascript api.
+			grid.InitXML(gridDom.xml);
+			
+			setCompareDescription();
+			
+			if (onlyDisplayChanges) {
+				doOnlyDisplayChanges();
+			}
+	
+		}
+		
+		
+		function setCompareDescription(){
+			var desc = bomcompareHelper.GetItemPrimaryIdentifiers(baseItem);
+			toolbar.getItem("description").SetText(desc);
+		}
+
+		// Display and load other version		
+		function loadOtherVersion(){
+			//console.info("side_to_other_version");
+			
+			var param = {
+				aras: aras,
+				title: aras.getResource("", "revisiondlg.item_versions"),
+				itemID: mainObjId,
+				itemTypeName: "Part",
+				doNotOpenItemOnDblClick: true,
+				callback: function (res) {
+					//console.info("Callback version");
+					if (res && res.item) {
+						//console.info("Callback res");
+						baseItemId = res.itemID;
+						loadGrid();
+					}
+				}
+			};
+			var options = {
+				dialogWidth: 900,
+				dialogHeight: 400,
+				resizable: true
+			};
+			//console.info("Select version");
+			aras.modalDialogHelper.show("DefaultPopup", window, param, options, "../../../../scripts/revisionDialog.html");
+			
+		}
+		
+		// Display and load other item
+		function loadOtherItem() {
+			//console.info("loadOtherItem");
+			var params = new Object();
+			params.aras = aras;              
+			params.itemtypeID = aras.getItemTypeId("Part");    
+			params.multiselect = false;
+			params.callback = function(dlgRes) {
+				if (dlgRes && dlgRes.item) {	
+					baseItemId = dlgRes.itemID;
+					loadGrid();
+				}
+			};
+			var options = {
+				dialogWidth: 900,
+				dialogHeight: 400,
+				resizable: true
+			};
+			aras.modalDialogHelper.show("DefaultPopup", window, params, options,"../../../../scripts/searchDialog.html");
+		}
+
+
+		// Toggle unchanged
+		function toggleUnchanged(buttonId){
+			
+			//var showOn = buttonId.endsWith("_off"); // Not supported by Internet Explorer
+			var showOn = buttonId.match("_off$");
+			if (showOn) {
+				toolbar.hideItem("toggle_unchanged_off");
+				toolbar.showItem("toggle_unchanged_on");
+			}
+			else {
+				toolbar.hideItem("toggle_unchanged_on");
+				toolbar.showItem("toggle_unchanged_off");
+			}
+			
+		
+			onlyDisplayChanges = !onlyDisplayChanges;
+			if (onlyDisplayChanges) {
+				doOnlyDisplayChanges();
+			}
+			else {
+				loadGrid();
+			}
+		}
+
+
+		function doOnlyDisplayChanges() {
+			onlyDisplayChanges = true;
+			var unchangesIds = [];
+			for (var i = 0; i < grid.getRowCount(); i++) {
+				var statusValue = grid.cells2(i,0).getText();	
+				if (statusValue == "Unchanged") {
+					unchangesIds.push(grid.GetRowId(i));
+				}
+			}
+			
+			for (var i = 0; i < unchangesIds.length; i++) {
+				var rowId = unchangesIds[i];
+				grid.deleteRow(rowId);
+			}
+		}
+		
+		function loadToolbar() {
+			toolbarReady = true;
+			// toolbar (dojo-typ/variabel?) laddar in componenterna ifrån xml filen
+			toolbar.loadXml(aras.getI18NXMLResource("BomCompare_toolbar.xml", aras.getScriptsURL() + "../Solutions/HilleConsultit/"));
+			// tb1 är xml-id if xmlen ovan. 
+			toolbar.ShowToolbar("tb1");
+			// initToolbar = dojo?
+			initToolbar();
+		}
+		
+		function onToolbarButtonClick(item) {
+			var cmdId = item.getId();
+			console.info("cmdId: " + cmdId);
+			if (cmdId == "refresh_compare"){
+				loadGrid();
+			}
+			if (cmdId == "side_to_other_version"){
+				loadOtherVersion();
+			}
+			if (cmdId == "side_to_other_itemType"){
+				loadOtherItem();
+			}
+			if ((cmdId == "toggle_unchanged_off") || (cmdId == "toggle_unchanged_on")) {
+				toggleUnchanged(item.getId());
+			}
+
+			if (cmdId == "export2Excel") {
+				var gridXmlCallback = function () {
+					return grid.getXML(true);
+				};
+				aras.export2Office(gridXmlCallback, cmdId);
+			}
+		}
+		
+		
+		function onCompareIndexChange(item) {
+			if (item.getId() == "compare_type") {
+				var newValue = item.getSelectedItem();
+				console.info("Change to compare by: " + newValue);
+				compareBy = newValue;
+				// Clear cached result
+				delete cachedResult;
+				loadGrid();
+			}
+		}
+
+
+	</script>
+	<table width="100%" height="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<td valign="top" id="toolbar_slot">
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" id="gridTD">
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

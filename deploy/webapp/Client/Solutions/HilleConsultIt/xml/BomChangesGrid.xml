@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<table delim="|" font="Arial-8" link_func="onLink" 
+draw_grid="true" multiselect="true" column_draggable="true" enableHtml="false" 
+enterAsTab="false" bgInvert="false" onDoubleClick="doDoubleClick" onRowSelect="onRowSelect" editable="false" onXmlLoaded = "onXmlLoaded">
+	<thead>
+		<th align="c">Ch. Type</th>
+		
+		<th align="c">Part Number</th>
+		<th align="cbold">Name ({0})</th>
+		<th align="c">Rev.</th>
+		<th align="c">Qty</th>
+		
+		<th align="c">--</th>
+		
+		<th align="c">Part Number </th>
+		<th align="cbold">Name ({1})</th>
+		<th align="c">Rev. </th>
+		<th align="c">Qty </th>
+		
+		<th align="c">Changes {2}</th>
+		
+	</thead>
+	<columns>
+		<column width="75" edit="" align="l" order="0"/>
+		
+		<column width="90" edit="" align="l" order="1"/>
+		<column width="250" edit="" align="l" order="2"/>
+		<column width="25" edit="" align="l" order="3"/>
+		<column width="25" edit="" align="l" order="4"/>
+		
+		
+		<column width="20" edit="" align="l" order="5"/>
+		
+		<column width="90" edit="" align="l" order="6"/>
+		<column width="250" edit="" align="l" order="7"/>
+		<column width="25" edit="" align="l" order="8"/>
+		<column width="25" edit="" align="l" order="9"/>
+		
+		<column width="350" edit="" align="l" order="10"/>
+		
+	</columns>
+	<menu/>
+
+</table>
