@@ -15,6 +15,7 @@
 		<name>$(binpath)/Conversion.Base.dll</name>
 		<name>$(binpath)/Aras.TDF.Base.dll</name>
 		<name>$(binpath)/Aras.ES.dll</name>
+        <name>$(binpath)/Hille.Aras.Core.dll</name>
 	</ReferencedAssemblies>
 
 	<Support dialect="VB" template="VBScript" compiler="Microsoft.VisualBasic.VBCodeProvider"/>
@@ -156,6 +157,7 @@ Imports System.Web
 Imports System.Web.SessionState
 Imports System.Globalization
 Imports Aras.IOM
+Imports Hille.Aras.Core
 
 Namespace $(pkgname)
 
@@ -353,6 +355,7 @@ using System.Text;
 using System.Web;
 using System.Web.SessionState;
 using System.Xml;
+using Hille.Aras.Core;
 
 namespace $(pkgname)
 {

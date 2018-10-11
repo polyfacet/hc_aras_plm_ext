@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toolbarapplet 
+	on_click = "onToolbarButtonClick"
+	on_load = "onToolbarLoad"
+	buttonstyle = "windows"
+	font = "Arial-20"
+	buttonsize="26,25">
+	<toolbar id="tb1">
+		<!--<button image="../images/Refresh.svg" id="refresh_compare" tooltip="Refresh the Table" statusmsg="Refresh the Table" /> -->
+		<button text="Side-by-Side with other Version" id="side_to_other_version" image="../images/ViewRevisions.svg" tooltip="Compare with other Version" />
+		<button text="Side-by-Side with other Part" id="side_to_other_itemType" image="../images/ViewItem.svg" tooltip="Compare with other Part" />
+		<choice width="auto" id="compare_type" tooltip="Compare by" text="Compare by">
+			<choiceitem id="Seq">Sequence</choiceitem>
+			<choiceitem id="Part Number">Part Number</choiceitem>
+		</choice> 
+		<button text="Toggle unchanged visibility" id="toggle_unchanged_off" image="../images/Step.svg" tooltip="Only show changes" />
+		<button text="Toggle unchanged visibility on" id="toggle_unchanged_on" image="../images/Step2.svg" tooltip="Show all components" invisible="true"/>
+		<separator/>
+		<button image="../images/ExportToExcel.svg" id="export2Excel" tooltip="Export To Excel" text="Export To Excel" disabled="false"/>
+		<separator/>
+		<edit id="description" tooltip="Description" label="Compared with:" text="" disabled="true" size="28" />
+
+	</toolbar>
+</toolbarapplet>
+

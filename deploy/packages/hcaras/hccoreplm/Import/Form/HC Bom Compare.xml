@@ -1,0 +1,39 @@
+﻿<AML>
+ <Item type="Form" id="6BD195C91B4B4432801E0895D4356B9B" action="add">
+  <category_form>0</category_form>
+  <height>234</height>
+  <stylesheet><![CDATA[../styles/default.css]]></stylesheet>
+  <width>699</width>
+  <name>HC Bom Compare</name>
+  <Relationships>
+   <Item type="Body" id="A11B61E87C9A4C938EFB8543A730B6CB" action="add">
+    <bg_color>#FFFFFF</bg_color>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Bom Compare" type="Form">6BD195C91B4B4432801E0895D4356B9B</source_id>
+    <Relationships>
+     <Item type="Field" id="4BAE1469596243E59269380C8E69AFB7" action="add">
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <html_code><![CDATA[<span id='ITEM_INFO_INTERNAL_SPAN'/>
+<script>
+  populate_ITEM_INFO_INTERNAL_SPAN = function()
+  {
+    document.getElementById('ITEM_INFO_INTERNAL_SPAN').innerHTML = aras.uiGetItemInfoTable(document.itemType);
+  }
+  window.addEventListener('load', populate_ITEM_INFO_INTERNAL_SPAN);
+</script>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>128</sort_order>
+      <source_id keyed_name="A11B61E87C9A4C938EFB8543A730B6CB" type="Body">A11B61E87C9A4C938EFB8543A730B6CB</source_id>
+      <tab_stop>0</tab_stop>
+      <x>0</x>
+      <y>0</y>
+      <name>item_info</name>
+     </Item>
+    </Relationships>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>

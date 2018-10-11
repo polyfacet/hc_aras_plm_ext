@@ -1,0 +1,177 @@
+﻿<AML>
+ <Item type="Method" id="478B34E9491C4CE5A5FF93D0483BAC47" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[' MethodTemplateName=VBMain;
+' Does a Bom Compare on input
+
+Private MethodName As String = "HC_PartBomCompare_Generic"
+Private Property Inn As Innovator
+Private Property Writer As XmlWriter
+Private Property CompareProperties As List(Of BomCompare.IBomCompareItemProperty)
+Private Property IndexProperty As BomCompare.IBomCompareItemProperty
+Private Property ComparePart As Item
+Private Property BasePart As Item
+Private Property CompareBy As String
+
+
+Function Main() As Item
+    Try
+        'System.Diagnostics.Debugger.Break()
+        Me.Inn = Me.getInnovator
+        Dim itemId As String = Me.getAttribute("id")
+        Dim baseId As String = Me.getAttribute("baseId")
+        Dim compareBy As String = Me.getAttribute("compareBy", "Part Number")
+        Dim relationshipName As String = Me.getAttribute("relationshipName", "")
+        Dim xmlOutputName As String = Me.getAttribute("output", "")
+
+        If Me.getProperty("Input", "") <> "" Then
+            'Server call context
+            itemId = Me.getPropertyAttribute("Input", "id")
+            baseId  = Me.getPropertyAttribute("Input","baseId")
+            compareBy = Me.getPropertyAttribute("Input", "compareBy", "Part Number")
+            relationshipName = Me.getPropertyAttribute("Input", "relationshipName", "")
+            xmlOutputName = Me.getPropertyAttribute("Input", "output", "")
+        End If
+        
+
+        Dim comparePart As Item = Me.Inn.getItemById("Part", itemId)
+        
+        Me.ComparePart = comparePart
+        Me.CompareBy = compareBy
+        If itemId = "undefined" Or itemId = String.Empty Then
+            ' Unsaved?
+            Return Me
+        End If
+
+        ' Compare with previous released version, if not baseId is specified
+        Dim baseItem As Item 
+        If baseId = String.Empty Or baseId = "undefined" Then
+            baseItem = GetPreviousReleasedRevision(comparePart)
+        Else
+            baseItem = Me.Inn.getItemById("Part", baseId)
+        End If
+        Me.BasePart = baseItem
+        
+        If itemId = Me.BasePart.getID Then
+            ' Don't compare with self
+            Return Me
+        End If
+
+        ' Setup compare
+        Dim partBomCompare As New BomCompare.PartBomCompare(Me.Inn)
+        If Not String.IsNullOrEmpty(relationshipName) Then
+            partBomCompare.RelationshipName = relationshipName
+        End If
+        
+        ' Default
+       partBomCompare.ChangeDescription = " this value {0} compared value {1}"
+
+        ' Get properties to compare/display
+        Me.CompareProperties = GetCompareProperties()
+        partBomCompare.SetProperties(Me.CompareProperties)
+
+        ' Run compare
+        Dim compareList As List(Of String) = partBomCompare.Compare(comparePart.getID(), baseItem.getID(), Me.IndexProperty)
+        ' Sort the list
+        partBomCompare.BomCompareRows.Sort()
+
+        Dim result As Item
+        
+        ' Get output
+        Dim xmlDoc As XmlDocument
+        Dim outputSettings As BomCompare.OutputFormat.IOutputSettings = New BomCompare.OutputFormat.DefaultOutputSettings
+        outputSettings.CellColors.ChangedRowColor = "lightyellow"
+        outputSettings.CellColors.ChangedCellColor = "yellow"
+        
+        ' Color can be modified
+        'outputSettings.CellColors.AddedRowColor = "green"
+        'outputSettings.CellColors.RemovedRowColor = "pink"
+        'outputSettings.CellColors.ReplacedRowColor = "orange" 
+        'outputSettings.CellColors.SplitterCellColor = "#000000"
+        'outputSettings.CellColors.ChangedRowColor = "lightyellow"
+        'outputSettings.CellColors.ChangedCellColor = "yellow"
+        
+        ' Extract the xml/html-format
+        'System.Diagnostics.Debugger.Break()
+        xmlDoc = partBomCompare.GetResultAsXml(outputSettings, xmlOutputName)
+
+        ' Transform format 
+        Dim result1 As Item = Inn.newResult("")
+        result1.dom.SelectSingleNode("//Result").InnerXml = xmlDoc.SelectSingleNode("//BomCompareResult").OuterXml
+        result = result1
+
+        Return result
+    Catch myEx As ArasException
+        Throw New Exception(myEx.Message, myEx)
+    Catch ex As Exception
+        CCO.Utilities.WriteDebug("ERROR_" & MethodName, ex.ToString)
+        Throw New ArasException(Inn, MethodName,  "Unhandled exception in " & MethodName & ex.Message, ex)
+    End Try
+End Function
+
+'''
+''' These compProperties list should match the BomChangesGrid.xml used on the client side
+Private Function GetCompareProperties() As List(Of BomCompare.IBomCompareItemProperty)
+    Dim compProperties As New List(Of BomCompare.IBomCompareItemProperty)
+
+    ' Setup the compare index
+    Dim seqProp As BomCompare.IBomCompareItemProperty = New BomCompare.RelationshipProperty("sort_order", "Sequence")
+    Dim itemNumberProp As BomCompare.IBomCompareItemProperty = New BomCompare.NonRelProperty("item_number", "Part Number")
+
+    If Me.CompareBy.ToUpper = "Seq".ToUpper Then
+        Me.IndexProperty = seqProp
+    End If
+    
+    If Me.CompareBy.ToUpper = "Part Number".ToUpper Then
+       Me.IndexProperty = itemNumberProp
+    End If
+    
+    If Me.IndexProperty Is Nothing Then
+        ' Add a user friendly message
+        Dim my_user_friendly_message As String = "Unknown IndexProperty in PartBomCompare_Generic: " & Me.CompareBy
+        Throw New ArasException(inn, MethodName, my_user_friendly_message , Nothing)
+    End If
+
+    compProperties.Add(itemNumberProp)
+
+    ' Add Non comare properties
+    Dim descCompProp As BomCompare.IBomCompareItemProperty = New BomCompare.NonRelProperty("name", "Name")
+    descCompProp.IsComparable = False
+
+    compProperties.Add(descCompProp)
+    compProperties.Add(New BomCompare.NonRelProperty("major_rev", "Revision"))
+    compProperties.Add(New BomCompare.RelationshipProperty("quantity", "Quantity"))
+
+    Return compProperties
+End Function
+
+Private Function GetPreviousReleasedRevision(ByVal item As Item) As Item
+    
+    Dim allVersions As Item = Me.Inn.newItem("Part", "getItemAllVersions")
+    allVersions.setID(item.getID)
+    allVersions = allVersions.apply()
+    Dim currentID As String = item.getID
+
+    Dim versionCount As Integer = allVersions.getItemCount
+
+    For i As Integer = versionCount - 1 To 0 Step -1
+        Dim version As Item = allVersions.getItemByIndex(i)
+        Dim gen As String = version.getProperty("generation")
+        Dim state As String = version.getProperty("state")
+        Dim id As String = version.getID
+        If id <> currentID Then
+            If "Released" = state OrElse "In Change" = state OrElse "Superseded" = state Then
+                Return version
+            End If
+        End If
+        
+    Next
+    Return item
+End Function
+
+
+]]></method_code>
+  <method_type>VB</method_type>
+  <name>HC_PartBomCompare_Generic</name>
+ </Item>
+</AML>
