@@ -9,7 +9,7 @@
 		<is_keyed>0</is_keyed>
 		<is_multi_valued>0</is_multi_valued>
 		<is_required>0</is_required>
-		<item_behavior>float</item_behavior>
+		<item_behavior>fixed</item_behavior>
 		<label xml:lang="en">Copied From</label>
 		<range_inclusive>0</range_inclusive>
 		<readonly>0</readonly>
