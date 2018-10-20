@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../styles/CommonStart.css" />
+		<script src="../javascript/CommonStart.js" ></script>
+	</head>
+	<body>
+		<!--<h2>Welcome!</h2> -->
+		<p class='content'>
+			Search or get latest modified items
+			<span id='motd'>
+				Message of the day <br/>
+				* Don't forget to take out the trash. <br/>
+				* And do the laundry. <br/>
+				* Finish the tea.
+			</span>
+		</p>
+		
+		<div id='top-panel'>
+			
+		</div>
+		<fieldset id='item-options'>
+				<legend>Options</legend>
+				<input type='button' id='searchItems' class='btn' name='searchItems' value='Search'/>
+				<input class='useroption' type='text' id='searchField' />
+				<br/>
+				<input type='button' id='refreshItems' class='btn' name='refreshItems' value='Latest modified'/>
+				<label for='onlyMine'>Only by me</label>
+				<input class='useroptionCb' type='checkbox' id='onlyMine' name='onlyMine' checked />
+				<br/>
+				<label for='itemLimit'>Max Result Count</label>
+				<input class='useroption' type='number' id='itemLimit' name='itemLimit' placeholder='10' step='1' value='10' max='50'></input>
+				<br/>
+				<!-- Item type on/off -->
+				<label class="switch" for='includeParts'>
+					<input class='useroptionCb' type="checkbox" id='includeParts' checked>Parts</input>
+					<span class="slider round"></span>
+				</label>
+				<label class="switch" for='includeDocuments'>
+					<input class='useroptionCb' type="checkbox" id='includeDocuments' checked>Documents</input>
+					<span class="slider round"></span>
+				</label>
+				<label class="switch" for='includeCAD'>
+					<input class='useroptionCb' type="checkbox" id='includeCAD' checked>CAD</input>
+					<span class="slider round"></span>
+				</label>
+		</fieldset>
+		<div class='item-tables'>
+	
+			<div id='resultMessage'></div>
+			
+			<!-- Data tables -->
+			<table id='last-parts' class='item-table'>
+
+			</table>
+			<br/>
+			
+			<table id='last-documents' class='item-table'>
+
+			</table>
+			<br/>
+			<table id='last-caddocuments' class='item-table'>
+
+			</table>
+		<div>
+		<script>
+		
+		function loadAllTables(searchValue) {
+			console.log({searchValue});
+			var table;
+			var userCheckbox;
+			
+			// Parts
+			userCheckbox = document.querySelector("#includeParts");
+			table = document.querySelector("#last-parts");
+			table.innerHTML = "";
+			if (userCheckbox.checked) {
+				loadItemsToTable(table,partDef,"Part",searchValue);
+			}
+			
+			// Documents
+			userCheckbox = document.querySelector("#includeDocuments");
+			table = document.querySelector("#last-documents");
+			table.innerHTML = "";
+			if (userCheckbox.checked) {
+				loadItemsToTable(table,documentDef,"Document",searchValue);
+			}
+			
+			// CAD Documents
+			userCheckbox = document.querySelector("#includeCAD");
+			table = document.querySelector("#last-caddocuments");
+			table.innerHTML = "";
+			if (userCheckbox.checked) {
+				loadItemsToTable(table,cadDocumentDef,"CAD",searchValue);
+			}
+		}
+
+		// Define Parts
+		var partDefStr = '{"typeName":"Part", "metadata" : ' + 
+		'[ ' +
+		'{"property":"item_number", "header":"Part Number", "openlink":"true" } ,' + 
+		'{"property":"major_rev", "header":"Rev." } ,' + 
+		'{"property":"classification", "header":"Type"},' +
+		'{"property":"name", "header":"Name"},' + 
+		'{"property":"state", "header":"State"},' + 
+		'{"property":"modified_on", "header" : "Modified on", "isDate":"true"},' +
+		'{"property":"modified_by_id", "header":"Modified By", "keyed_name":"true"}' + 
+		']' +
+		' , "searchFields": ' +
+		'[ ' +
+			'{"property":"item_number"} ,' + 
+			'{"property":"name"}' + 
+		']' +
+		'}';
+		var partDef = JSON.parse(partDefStr);
+		
+		// Define Documents
+		var documentDefStr = '{"typeName":"Document", "metadata" : ' + 
+		'[ {"property":"item_number", "header":"Document Number", "openlink":"true" } ,' + 
+		'{"property":"classification", "header":"Type"},' +
+		'{"property":"name", "header":"Name"},' + 
+		'{"property":"state", "header":"State"},' + 
+		'{"property":"authoring_tool", "header":"Authoring Tool"},' + 
+		'{"property":"modified_on", "header" : "Modified on", "isDate":"true"}' +
+		']' + 
+		' , "searchFields": ' +
+		'[ ' +
+			'{"property":"item_number"} ,' + 
+			'{"property":"name"}' + 
+		']' +
+		'}';
+		var documentDef = JSON.parse(documentDefStr);
+		
+		// Define CAD Documents
+		var cadDocumentDefStr = '{"typeName":"CAD", "metadata" : ' + 
+		'[ {"property":"item_number", "header":"CAD Number", "openlink":"true" } ,' + 
+		'{"property":"classification", "header":"Type"},' +
+		'{"property":"name", "header":"Name"},' + 
+		'{"property":"state", "header":"State"},' + 
+		'{"property":"viewable_file", "header":"Viewable File", "isFile":"true"},' + 
+		'{"property":"authoring_tool", "header":"Authoring Tool"},' + 
+		'{"property":"modified_on", "header" : "Modified on", "isDate":"true"}' +
+		']' + 
+		' , "searchFields": ' +
+		'[ ' +
+			'{"property":"item_number"} ,' + 
+			'{"property":"name"}' + 
+		']' +
+		'}';
+		var cadDocumentDef = JSON.parse(cadDocumentDefStr);
+
+		
+		
+	
+		// Bind double-click to open item
+		var t = document.querySelector(".item-tables");
+		t.addEventListener("dblclick", open);
+		
+		// Bind button to reload tables
+		var btn = document.querySelector("#refreshItems");
+		btn.addEventListener("click", refreshLatest);
+		
+		// Bind button to reload tables
+		var btn2 = document.querySelector("#searchItems");
+		btn2.addEventListener("click", searchItems);
+		
+		
+		// Load user settings for checkboxes and bind checkbox clicks
+		var userCheckboxes = document.querySelectorAll(".useroptionCb");
+		for (var i=0; i<userCheckboxes.length;i++) {
+			var userCheckbox = userCheckboxes[i];
+			var userValue = getUserSetting(userCheckbox.id);
+			if (userValue !== null) {
+				userCheckbox.checked = (userValue == 'true');
+			}
+			// Bind event
+			userCheckbox.addEventListener("click", toggleCb);
+		}
+		
+		// Load user settings for other and bind changes
+		var userOptions = document.querySelectorAll(".useroption");
+		for (var i=0; i<userOptions.length;i++) {
+			var userOption = userOptions[i];
+			var userValue = getUserSetting(userOption.id);
+			if (userValue !== null) {
+				userOption.value = userValue;
+			}
+			// Bind event
+			userOption.addEventListener("change", setUserOption);
+		}
+		
+		// Load tables
+		//refreshLatest();
+		
+	
+
+		/*
+		// Requires OOTB mod: Support Tabs.js to open in background if Ctrl-button is held down
+		var ctrlDownOnClick = false;
+		if (t != null ) {
+			t.addEventListener("click", ctrlDownOnClickEv);
+		}
+		function ctrlDownOnClickEv(ev) {
+			console.log("ctrlDownOnClickEv event triggered");
+			ctrlDownOnClick = false;
+			if (ev.ctrlKey) {ctrlDownOnClick = true;}
+			top.aras.utils.setCtrlButtonStateDown(ctrlDownOnClick);
+		}
+		*/
+		
+		</script>
+		
+		
+	</body>
+
+</html>

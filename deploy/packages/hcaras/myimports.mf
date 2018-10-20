@@ -7,4 +7,5 @@
   </package>
   <package name="se.hilleconsultit.hccoreplmtgv" path="hccoreplmtgv\Import">
   </package>
+  <package name="se.hilleconsultit.hccoreplmstart" path="hccoreplmstart\Import"></package>
 </imports>
