@@ -111,7 +111,7 @@
       <y>134</y>
       <name>is_ecologic</name>
      </Item>
-	  <Item type="Field" typeId="0BB5B81FEB37475BB9C779408080DB61" id="F4E6454AD43741A6862D771603A3FE15">
+	  <Item type="Field" id="F4E6454AD43741A6862D771603A3FE15" action="add">
 		<display_length_unit>px</display_length_unit>
 		<field_type>textarea</field_type>
 		<font_color>#000000</font_color>
