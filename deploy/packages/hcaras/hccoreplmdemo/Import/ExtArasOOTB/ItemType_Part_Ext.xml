@@ -112,5 +112,38 @@
 		<track_history>0</track_history>
 		<name>is_ecologic</name>
 	   </Item>
+	   
+	   <Item type="Property" id="B71FDC380D5B4A68BDBEC5286CE770C1" action="add">
+            <column_alignment>left</column_alignment>
+            <data_type>federated</data_type>
+            <is_hidden>0</is_hidden>
+            <is_hidden2>0</is_hidden2>
+            <is_indexed>0</is_indexed>
+            <is_keyed>0</is_keyed>
+            <is_multi_valued>0</is_multi_valued>
+            <is_released>0</is_released>
+            <is_required>0</is_required>
+            <label xml:lang="en">Latest Change Note</label>
+            <range_inclusive>0</range_inclusive>
+            <readonly>0</readonly>
+            <sort_order>95640</sort_order>
+            <source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+            <track_history>0</track_history>
+            <name>hc_latest_change_note</name>
+       </Item>
+	  
+
+	<Item type="Server Event" id="80ACE3E890854F1BB80877F795DC0620" action="add">
+		<event_version>version_1</event_version>
+		<is_required>0</is_required>
+		<related_id keyed_name="HC_PartGetFederatedProps" type="Method">
+		 <Item type="Method" action="get" select="id">
+		  <name>HC_PartGetFederatedProps</name>
+		 </Item>
+		</related_id>
+		<server_event>onAfterGet</server_event>
+		<sort_order>100385</sort_order>
+		<source_id keyed_name="Part" type="ItemType" name="Part">4F1AC04A2B484F3ABA4E20DB63808A88</source_id>
+	</Item>
 	
 </AML>
