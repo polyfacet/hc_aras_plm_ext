@@ -27,7 +27,7 @@ function findItems(itemDef, pageSize, searchString, onlyLatestReleased) {
 	q.setAttribute("page","1");
 	q.setAttribute("pagesize",pageSize);
 	
-	// TODO: Add option on Latest Released
+	// Option on Latest Released
 	if (onlyLatestReleased) {
 		q.setProperty("is_released", "1");
 		q.setProperty("generation","0");
@@ -38,12 +38,13 @@ function findItems(itemDef, pageSize, searchString, onlyLatestReleased) {
 	}
 	
 	if (itemDef.searchFields) {
-		// TODO: Loop search fields
+		// Loop search fields
 		var logicalOR = q.newOR(); 
-		logicalOR.setProperty("item_number",searchString);
-		logicalOR.setPropertyCondition('item_number', 'like'); 
-		logicalOR.setProperty("name",searchString);
-		logicalOR.setPropertyCondition('name', 'like'); 	
+		for (var i = 0; i<itemDef.searchFields.length;i++){
+			var prop = itemDef.searchFields[i].property;
+			logicalOR.setProperty(prop,searchString);
+			logicalOR.setPropertyCondition(prop, 'like'); 
+		}
 	}
 	else {
 		console.log("No search definition for " + itemDef.typeName);
