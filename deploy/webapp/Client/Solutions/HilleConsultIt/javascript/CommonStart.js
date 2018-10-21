@@ -18,7 +18,7 @@ function getLastItems(typeName, pageSize, onlyMine) {
 }
 
 
-function findItems(itemDef, pageSize, searchString) {
+function findItems(itemDef, pageSize, searchString, onlyLatestReleased) {
 	if (!pageSize) {
 		pageSize = "10";
 	}
@@ -26,6 +26,17 @@ function findItems(itemDef, pageSize, searchString) {
 	q.setAttribute("orderBy","modified_on DESC");
 	q.setAttribute("page","1");
 	q.setAttribute("pagesize",pageSize);
+	
+	// TODO: Add option on Latest Released
+	if (onlyLatestReleased) {
+		q.setProperty("is_released", "1");
+		q.setProperty("generation","0");
+		q.setPropertyCondition('generation', 'gt'); 	
+		var logicalOR1 = q.newOR(); 
+		logicalOR1.setProperty("state", "Released");
+		logicalOR1.setProperty("state", "In Change");
+	}
+	
 	if (itemDef.searchFields) {
 		// TODO: Loop search fields
 		var logicalOR = q.newOR(); 
@@ -156,6 +167,7 @@ function getSelectedItem() {
 function loadItemsToTable(table, itemDef, itemType, searchString) {
 	var onlyMine = document.querySelector("#onlyMine").checked;
 	var itemLimit = document.querySelector("#itemLimit").value;
+	var onlyLatestReleased = document.querySelector("#onlyLatestReleased").checked;
 	
 	var searchMode = false;
 	if (searchString) {
@@ -169,7 +181,7 @@ function loadItemsToTable(table, itemDef, itemType, searchString) {
 	var message;
 	if (searchMode) {
 		console.log("searchMode");
-		items = findItems(itemDef, itemLimit, searchString);	
+		items = findItems(itemDef, itemLimit, searchString, onlyLatestReleased);	
 		message = "Search results for: " + searchString;
 	}
 	else {
