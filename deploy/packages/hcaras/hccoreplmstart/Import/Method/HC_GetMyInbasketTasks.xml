@@ -14,18 +14,62 @@ string amlQuery = @"<AML><Item type='InBasket Task' action='get' returnMode='ite
 			
 Item result = inn.applyAML(amlQuery);
 
+//Extract additional info from Inbasket Tasks/Workflow Tasks
 for(int i =0;i<result.getItemCount();i++) {
-    Item temp = result.getItemByIndex(i);
-    string key = temp.getProperty("item_type_id");
+    Item wfTask = result.getItemByIndex(i);
+    string key = wfTask.getProperty("item_type_id");
     string typeName = key; 
     if (typeLabelMap.ContainsKey(key)) {
         typeName = typeLabelMap[key];
     }
     
+    // Get wfpID, wfpName, actID, asmntID, itemID as , separated id string.... itemID = SourceItem id ,e.g. Express ECO id
+    string wfTaskId = wfTask.getID();
+    string activityAssignmentId = wfTaskId; // Magic! These ids match.
+    
+    amlQuery = @"
+    <AML>
+    	<Item action='get' type='Workflow Process' select='name'>
+    		<Relationships>
+    			<Item action='get' type='Workflow Process Activity'>
+    				<related_id>
+    					<Item action='get' type='Activity' select='id'>
+    						<Relationships>
+    							<Item action='get' type='Activity Assignment' select='id,comments'>
+    								<id>{0}</id>
+    							</Item>
+    						</Relationships>
+    					</Item>
+    				</related_id>
+    			</Item>
+    		</Relationships>
+    	</Item>
+    </AML>";
+    
+    amlQuery = String.Format(amlQuery,wfTaskId);
+    Item res = inn.applyAML(amlQuery);
+    string wfpID =res.getID();
+    string wfpName = res.getProperty("name");
+    string actID = res.getItemsByXPath("//Item[@type='Activity']").getItemByIndex(0).getID();
+    string itemId = wfTask.getProperty("item");
+    StringBuilder sb = new StringBuilder();
+    sb.AppendFormat("{0},", wfpID);
+    sb.AppendFormat("{0},", wfpName);
+    sb.AppendFormat("{0},", actID);
+    sb.AppendFormat("{0},", activityAssignmentId);
+    sb.AppendFormat("{0}", itemId);
+    string voteNowInput = sb.ToString();
+    
+    string comments = res.getItemsByXPath("//Item[@type='Activity Assignment']").getItemByIndex(0).getProperty("comments","");
+    
+    // Append properties
+    result.getItemByIndex(i).setProperty("vote_now_input", voteNowInput);
     result.getItemByIndex(i).setProperty("item_type_name", typeName);
+    result.getItemByIndex(i).setProperty("comments", comments);
 }
 
 return result;
+
 ]]></method_code>
   <method_type>C#</method_type>
   <name>HC_GetMyInbasketTasks</name>

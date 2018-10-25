@@ -5,12 +5,12 @@ var idMap = new Map();
 var inbasketDefStr = '{"typeName":"InBasket Task", "metadata" : ' + 
 '[ ' +
 '{"property":"item_type_name", "header":"Type" } ,' + 
-'{"property":"item", "header":"Source Item", "openlink":"true", "keyed_name":"true" } ,' + 
+'{"property":"item", "header":"Process Item", "openlink":"true", "keyed_name":"true" } ,' + 
 '{"property":"keyed_name", "header":"Activity"},' +
 '{"property":"instructions", "header":"Instructions"},' + 
-'{"property":"classification", "header":"Sign off"},' + 
+'{"property":"vote_now_input", "header":"Sign off", "voteNowInput":"true"},' + 
 '{"property":"start_date", "header" : "Start Date", "isDate":"true"},' +
-'{"property":"classification", "header" : "Comments"},' +
+'{"property":"comments", "header" : "Comments"},' +
 '{"property":"classification", "header":"Workflow link"}' + 
 ']' +
 ' , "searchFields": ' +
@@ -173,6 +173,17 @@ function insertToTable(table, items, metaDef) {
 			else if(metaDef.metadata[j].openlink) {
 				var displayValue = item.getProperty(prop);
 				var aElementString = `<a href='javascript:void(0)' onclick='openItem("${metaDef.typeName}", "${itemId}")'>${displayValue}</a> `;
+				newRow.insertCell().innerHTML = aElementString;
+			}
+			else if(metaDef.metadata[j].voteNowInput) {
+				var displayValue = "Sign off";
+				var fields = item.getProperty(prop).split(',');
+				var wfpID = fields[0];
+				var wfpName = fields[1];
+				var actID = fields[2];
+				var activityAssignmentId = fields[3];
+				var sourceItemId = fields[4];
+				var aElementString = `<a href='javascript:void(0)' onclick='voteNow("${wfpID}", "${wfpName}", "${actID}", "${activityAssignmentId}", "${sourceItemId}")'>${displayValue}</a> `;
 				newRow.insertCell().innerHTML = aElementString;
 			}
 			else {
