@@ -35,6 +35,11 @@ label {
 	margin-left:1em;
 }
 
+p.header {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
 .btn {
 	padding: .2rem;
 	background: #86d1f0;
@@ -44,9 +49,10 @@ label {
 }
 .btn:hover {background-color: #97e5f8}
 
-.btn:active {
-	background-color: #44a0d0;
-}
+.btn:active {	background-color: #44a0d0}
+
+.img_btn:hover {background-color: #e3e8ef}
+.img_btn:active {background-color: #bacff4}
 
 
 .switch {

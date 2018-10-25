@@ -32,22 +32,61 @@
 				<input class='useroptionCb' type='checkbox' id='onlyMine' name='onlyMine' checked />
 				<br/>
 				<label for='itemLimit'>Max Result Count</label>
-				<input class='useroption' type='number' id='itemLimit' name='itemLimit' placeholder='10' step='1' value='10' max='50'></input>
+				<input class='useroption' type='number' id='itemLimit' name='itemLimit' placeholder='10' step='1' value='10' max='50' />
 				<br/>
 				<!-- Item type on/off -->
 				<label class="switch" for='includeParts'>
-					<input class='useroptionCb' type="checkbox" id='includeParts' checked>Parts</input>
+					<input class='useroptionCb' type="checkbox" id='includeParts' checked />
 					<span class="slider round"></span>
+					<div>Parts</div>
 				</label>
 				<label class="switch" for='includeDocuments'>
-					<input class='useroptionCb' type="checkbox" id='includeDocuments' checked>Documents</input>
+					<input class='useroptionCb' type="checkbox" id='includeDocuments' checked />
 					<span class="slider round"></span>
+					<div>Documents</div>
 				</label>
 				<label class="switch" for='includeCAD'>
-					<input class='useroptionCb' type="checkbox" id='includeCAD' checked>CAD</input>
+					<input class='useroptionCb' type="checkbox" id='includeCAD' checked />
 					<span class="slider round"></span>
+					<div>CAD</div>
 				</label>
 		</fieldset>
+		<div class='inbasket'>
+			<p class='header'>
+					My Inbasket
+				<label class="switch" for='inbasketCb'>
+					<input class='useroptionCb' type="checkbox" id='inbasketCb' checked/>
+					<span class="slider round"></span>
+				</label>
+			</p>
+			<div id='inbasket-section'>
+				<input class="img_btn" width="32" height="32" type="image" id="refreshInbasket" onclick='loadMyInbasketItemsToTable()' src="../../../images/Refresh.svg"/>
+				<table id='inbasket-table'>
+					<!-- Dummy -->
+					<tr>
+						<th width="100">SourceItem Type</th>
+						<th width="150">Source Item Keyed Name with link to Source Item</th>
+						<th>Activity</th>
+						<th>Instructions</th>
+						<th>Open Signoff</th>
+						<th>Start Date</th>
+						<th>Comments</th>
+						<th>Workflow</th>
+					</tr>
+					<tr>
+						<td>ECO</td>
+						<td><a href='#'>920001</a></td>					
+						<td>Draft changes</td>
+						<td>Do this and that</td>
+						<td><a href='javascript:void(0)' onclick='voteNow("9D6EFE6EB58F4AAC9DDAE523C374B621","ECO-00001003","D110316B06204789B14BF00447CE5E2B","A8D30F4EF52F48EF99458C87E0CC4CDA","1A64B4581C8B4C7187FCEDBB0B765B5E")'>Signoff</a></td>
+						<td>2018-10-25</td>
+						<td>I will do this later.</td>
+						<td>ImageLink</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br/>
 		<div class='item-tables'>
 	
 			<div id='resultMessage'></div>
@@ -192,6 +231,8 @@
 			userOption.addEventListener("change", setUserOption);
 		}
 		
+		var inbasketCbChecked = document.querySelector("#inbasketCb").checked;
+		toggleVisbilityByElementId("inbasket-section",inbasketCbChecked);
 		// Load tables
 		//refreshLatest();
 		

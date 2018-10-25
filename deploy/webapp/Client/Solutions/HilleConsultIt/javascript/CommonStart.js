@@ -1,6 +1,41 @@
 var selectedId;
 var idMap = new Map();
 
+// My InBasket
+var inbasketDefStr = '{"typeName":"InBasket Task", "metadata" : ' + 
+'[ ' +
+'{"property":"item_type_name", "header":"Type" } ,' + 
+'{"property":"item", "header":"Source Item", "openlink":"true", "keyed_name":"true" } ,' + 
+'{"property":"keyed_name", "header":"Activity"},' +
+'{"property":"instructions", "header":"Instructions"},' + 
+'{"property":"classification", "header":"Sign off"},' + 
+'{"property":"start_date", "header" : "Start Date", "isDate":"true"},' +
+'{"property":"classification", "header" : "Comments"},' +
+'{"property":"classification", "header":"Workflow link"}' + 
+']' +
+' , "searchFields": ' +
+'[ ' +
+	'{"property":"keyed_name"} ,' + 
+	'{"property":"instructions"}' + 
+']' +
+'}';
+var inbasketDef = JSON.parse(inbasketDefStr);
+
+
+function loadMyInbasketItemsToTable() {
+	var items = getMyInbasketItems();
+	var table = document.querySelector("#inbasket-table");
+	table.innerHTML = "";
+	insertToTable(table,items,inbasketDef);
+}
+
+function getMyInbasketItems() {
+	console.debug("getMyInbasketItems");
+	var q = top.aras.newIOMItem("Method", "HC_GetMyInbasketTasks");
+	var r = q.apply();
+	console.debug({r});
+	return r;
+}
 
 function getLastItems(typeName, pageSize, onlyMine) {
 	if (!pageSize) {
@@ -116,6 +151,16 @@ function insertToTable(table, items, metaDef) {
 				var dateValue = new Date(item.getProperty(prop));
 				newRow.insertCell().textContent = dateValue.toLocaleString("sv-SE");
 			}
+			else if(metaDef.metadata[j].keyed_name && metaDef.metadata[j].openlink) {
+				var displayValue = item.getPropertyAttribute(prop,"keyed_name");
+				var typeName = metaDef.typeName;
+				itemId = item.getProperty(prop);
+				if (typeName == "InBasket Task") {
+					typeName = item.getPropertyAttribute("item_type_id", "keyed_name");
+				}
+				var aElementString = `<a href='javascript:void(0)' onclick='openItem("${typeName}", "${itemId}")'>${displayValue}</a> `;
+				newRow.insertCell().innerHTML = aElementString;
+			}
 			else if(metaDef.metadata[j].keyed_name) {
 				newRow.insertCell().textContent = item.getPropertyAttribute(prop,"keyed_name");
 			}
@@ -211,6 +256,32 @@ function toggleCb(ev) {
 	console.log({ev});
 	if (ev) {
 		storeUserSetting(ev.srcElement.id,ev.srcElement.checked.toString());
+		toggleSectionVisible(ev);
+	}
+}
+
+function toggleSectionVisible(ev) {
+	if(ev) {
+		var checked = ev.srcElement.checked;
+		var id;
+		if (ev.srcElement.id == "inbasketCb") {
+			id = 'inbasket-section';
+		}
+		if (id) {
+			toggleVisbilityByElementId(id,checked);
+		}
+	}
+}
+
+function toggleVisbilityByElementId(id,onOrOffBool) {
+	var element = document.querySelector(`#${id}`);
+	if (element) {
+		if (onOrOffBool) {
+			element.removeAttribute("hidden");
+		}
+		else {
+			element.setAttribute("hidden","");
+		}
 	}
 }
 
@@ -229,4 +300,32 @@ function searchItems() {
 
 function refreshLatest() {
 	loadAllTables();
+}
+
+
+function voteNow(wfpID, wfpName, actID, asmntID, itemID) {
+	if(typeof aras === "undefined"){
+		var aras = parent.parent.aras;
+	}
+	if(!aras) {
+		alert("aras is not specified.");
+		return;
+	}
+	var params = {};
+	params.aras = aras;
+	params.activity = aras.getItemById("Activity", actID, 1);
+	params.wflName = wfpName;
+	params.wflId = wfpID;
+	params.assignmentId = asmntID;
+	params.itemId = itemID;
+	params.dialogWidth = 700;
+	params.dialogHeight = 500;
+	params.resizable = true;
+	params.scroll = true;
+	params.content = "InBasket/InBasket-VoteDialog.aspx";
+	aras.getMostTopWindowWithAras(window).ArasModules.Dialog.show("iframe", params).promise.then(function (res) {
+	if (parent && parent.Core_loadProcessReport) {
+		parent.setTimeout(parent.Core_loadProcessReport, 0);
+		}
+	});
 }
