@@ -25,8 +25,13 @@ function findItems(itemDef, pageSize, searchString, onlyLatestReleased) {
 	q.setAttribute("page","1");
 	q.setAttribute("pagesize",pageSize);
 	
+	if (itemDef.onlyLatest) {
+		// Ignore onlyLatestReleased
+		onlyLatestReleased = false;
+	}
+	
 	// Option on Latest Released
-	if (onlyLatestReleased) {
+	if (onlyLatestReleased ) {
 		q.setProperty("is_released", "1");
 		q.setProperty("generation","0");
 		q.setPropertyCondition('generation', 'gt'); 	

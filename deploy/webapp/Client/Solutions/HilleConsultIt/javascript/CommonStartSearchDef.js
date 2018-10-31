@@ -59,7 +59,7 @@ var cadDocumentDef = JSON.parse(cadDocumentDefStr);
 itemDefinitions.push(cadDocumentDef);
 
 // Define ECO 
-var ecoDefStr = '{"typeName":"Express ECO", "tableId":"ecos", "includeSwitchId":"includeECO", "metadata" : ' + 
+var ecoDefStr = '{"typeName":"Express ECO", "tableId":"ecos", "includeSwitchId":"includeECO", "onlyLatest":"true", "metadata" : ' + 
 '[ {"property":"item_number", "header":"ECO Number", "openlink":"true" } ,' + 
 '{"property":"title", "header":"Title"},' + 
 '{"property":"modified_on", "header" : "Modified on", "isDate":"true"}' +
