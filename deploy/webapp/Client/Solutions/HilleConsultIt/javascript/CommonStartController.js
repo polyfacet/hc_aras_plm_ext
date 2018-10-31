@@ -4,10 +4,28 @@ var idMap = new Map();
 
 function insertToTable(table, items, metaDef) {
 	//console.debug({metaDef});
+	var captionRow = table.appendChild(document.createElement('caption'));
+	let div1 = document.createElement("div");
+	div1.setAttribute("class","tableCaption");
+	if (metaDef.typeName == "InBasket Task") {
+		// Add time stamp
+		div1.classList.add("inbasket");
+		let spanEl = document.createElement("span");
+		let currentDateValue = new Date();
+		let dateString = currentDateValue.toLocaleString("sv-SE")
+		spanEl.innerText = `Refreshed at: ${dateString}`;
+		div1.appendChild(spanEl);
+	}
+	else {
+		div1.innerHTML = metaDef.typeName;
+	}
+	captionRow.appendChild(div1);
+
 	// Create thead
 	var thead = table.createTHead();
-	var captionRow = thead.insertRow();
 	
+	/*
+	var captionRow = thead.insertRow();
 	if (metaDef.typeName == "InBasket Task") {
 		// Add time stamp
 		let div1 = document.createElement("div");
@@ -24,6 +42,7 @@ function insertToTable(table, items, metaDef) {
 		th1.innerHTML = metaDef.typeName;
 		captionRow.appendChild(th1);
 	}
+	*/
 	
 	var headRow = thead.insertRow();
 	for (var i = 0; i<metaDef.metadata.length; i++) {
@@ -33,13 +52,14 @@ function insertToTable(table, items, metaDef) {
 	}
 	
 	// Add content rows
+	let tbody = table.appendChild(document.createElement('tbody'));
 	var itemCount = items.getItemCount();
 	for (var i = 0; i < itemCount; i++ ){ 
 		var item = items.getItemByIndex(i);
 		var itemId = item.getID();
 		idMap.set(itemId,item);
 		
-		var newRow = table.insertRow();
+		var newRow = tbody.insertRow();
 		newRow.setAttribute("itemId", itemId);
 		for (var j = 0; j<metaDef.metadata.length; j++) {
 			var prop = metaDef.metadata[j].property;
@@ -97,6 +117,8 @@ function insertToTable(table, items, metaDef) {
 		newRow.onclick = rowClick(newRow);
 		
 	}
+	table.classList.add("sortable");
+	sorttable.makeSortable(table);
 }
 
 function rowClick(row) {
