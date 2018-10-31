@@ -1,148 +1,30 @@
 var selectedId;
 var idMap = new Map();
 
-// My InBasket
-var inbasketDefStr = '{"typeName":"InBasket Task", "metadata" : ' + 
-'[ ' +
-'{"property":"item_type_name", "header":"Type" } ,' + 
-'{"property":"item", "header":"Process Item", "openlink":"true", "keyed_name":"true" } ,' + 
-'{"property":"keyed_name", "header":"Activity"},' +
-'{"property":"instructions", "header":"Instructions"},' + 
-'{"property":"vote_now_input", "header":"Sign Off", "voteNowInput":"true"},' + 
-'{"property":"start_date", "header" : "Start Date", "isDate":"true"},' +
-'{"property":"comments", "header" : "Comments"},' +
-'{"property":"pid", "header" : "Workflow", "wfLink":"true"}' +
-//'{"property":"classification", "header":"Sign Off Report"}' + 
-']' +
-' , "searchFields": ' +
-'[ ' +
-	'{"property":"keyed_name"} ,' + 
-	'{"property":"instructions"}' + 
-']' +
-'}';
-var inbasketDef = JSON.parse(inbasketDefStr);
-
-
-function loadMyInbasketItemsToTable() {
-	var items = getMyInbasketItems();
-	var table = document.querySelector("#inbasket-table");
-	table.innerHTML = "";
-	insertToTable(table,items,inbasketDef);
-}
-
-function getMyInbasketItems() {
-	console.debug("getMyInbasketItems");
-	var q = top.aras.newIOMItem("Method", "HC_GetMyInbasketTasks");
-	var r = q.apply();
-	console.debug({r});
-	return r;
-}
-
-function openWorkflowProcess(pid,processName) {
-	var params = {};
-	params.aras = top.aras;
-	params.processID = pid;
-	params.processName = processName; // arasObj.getItemProperty(item, 'name');
-	params.dialogWidth = 840;
-	params.dialogHeight = 400;
-	params.content = 'WorkflowProcess/WflProcessViewer.aspx';
-
-	var win = top.aras.getMostTopWindowWithAras(window);
-	(win.main || win).ArasModules.Dialog.show('iframe', params);
-}
-
-function getLastItems(typeName, pageSize, onlyMine) {
-	if (!pageSize) {
-		pageSize = "10";
-	}
-	var q = top.aras.newIOMItem(typeName, "get");
-	q.setAttribute("orderBy","modified_on DESC");
-	q.setAttribute("page","1");
-	q.setAttribute("pagesize",pageSize);
-	if (onlyMine) {
-		q.setProperty("modified_by_id",top.aras.getUserID());
-	}
-	var r = q.apply();
-	return r;
-}
-
-
-function findItems(itemDef, pageSize, searchString, onlyLatestReleased) {
-	if (!pageSize) {
-		pageSize = "10";
-	}
-	var q = top.aras.newIOMItem(itemDef.typeName, "get");
-	q.setAttribute("orderBy","modified_on DESC");
-	q.setAttribute("page","1");
-	q.setAttribute("pagesize",pageSize);
-	
-	// Option on Latest Released
-	if (onlyLatestReleased) {
-		q.setProperty("is_released", "1");
-		q.setProperty("generation","0");
-		q.setPropertyCondition('generation', 'gt'); 	
-		var logicalOR1 = q.newOR(); 
-		logicalOR1.setProperty("state", "Released");
-		logicalOR1.setProperty("state", "In Change");
-	}
-	
-	if (itemDef.searchFields) {
-		// Loop search fields
-		var logicalOR = q.newOR(); 
-		for (var i = 0; i<itemDef.searchFields.length;i++){
-			var prop = itemDef.searchFields[i].property;
-			logicalOR.setProperty(prop,searchString);
-			logicalOR.setPropertyCondition(prop, 'like'); 
-		}
-	}
-	else {
-		console.log("No search definition for " + itemDef.typeName);
-		q.setPropertyAttribute("item_number","condition","like");
-		q.setProperty("item_number",searchString);
-	}
-
-	var r = q.apply();
-	return r;	
-}
-
-function open(){
-	console.debug("open");
-	var item = getSelectedItem();
-	if (item == null) {
-		console.debug("No row selected");
-		return false;
-	}
-	top.aras.uiShowItemEx(item.node,"tab view");
-}
-
-function getBOM(itemId) {
-	var q = top.aras.newIOMItem("Part BOM", "get");
-	q.setProperty("source_id", itemId);
-	var r = q.apply();
-	return r;
-}
-
-function openFile(fileId) {
-	console.debug("Open file");
-	top.aras.uiShowItem("File", fileId);
-}
-
-function openItem(itemType, itemId) {
-	console.debug("Open item");
-	console.debug({itemType});
-	console.debug({itemId});
-	top.aras.uiShowItem(itemType, itemId);
-}
 
 function insertToTable(table, items, metaDef) {
-	console.debug({metaDef});
+	//console.debug({metaDef});
 	// Create thead
 	var thead = table.createTHead();
 	var captionRow = thead.insertRow();
-	var th1 = document.createElement("th");
-	th1.setAttribute("class","tableCaption");
-	th1.innerHTML = metaDef.typeName;
-	captionRow.appendChild(th1);
+	
+	if (metaDef.typeName == "InBasket Task") {
+		// Add time stamp
+		let div1 = document.createElement("div");
+		let spanEl = document.createElement("span");
+		let currentDateValue = new Date();
+		let dateString = currentDateValue.toLocaleString("sv-SE")
+		spanEl.innerText = `Refreshed at: ${dateString}`;
+		div1.appendChild(spanEl);
+		captionRow.appendChild(div1);
+	}
+	else {
+		var th1 = document.createElement("th");
+		th1.setAttribute("class","tableCaption");
+		th1.innerHTML = metaDef.typeName;
+		captionRow.appendChild(th1);
+	}
+	
 	var headRow = thead.insertRow();
 	for (var i = 0; i<metaDef.metadata.length; i++) {
 		var th = document.createElement("th");
@@ -285,7 +167,7 @@ function getUserSetting(id) {
 }
 
 function toggleCb(ev) {
-	console.log({ev});
+	//console.log({ev});
 	if (ev) {
 		storeUserSetting(ev.srcElement.id,ev.srcElement.checked.toString());
 		toggleSectionVisible(ev);
@@ -298,6 +180,7 @@ function toggleSectionVisible(ev) {
 		var id;
 		if (ev.srcElement.id == "inbasketCb") {
 			id = 'inbasket-section';
+			loadMyInbasketItemsToTable();
 		}
 		if (id) {
 			toggleVisbilityByElementId(id,checked);
@@ -306,20 +189,20 @@ function toggleSectionVisible(ev) {
 }
 
 function toggleVisbilityByElementId(id,onOrOffBool) {
-	var element = document.querySelector(`#${id}`);
+	let element = document.querySelector(`#${id}`);
 	if (element) {
 		if (onOrOffBool) {
-			element.removeAttribute("hidden");
+			element.style.display = "block";
 		}
 		else {
-			element.setAttribute("hidden","");
+			element.style.display = "none";
 		}
 	}
 }
 
 function setUserOption(ev) {
-	console.log("setUserOption");
-	console.log({ev});
+	//console.log("setUserOption");
+	//console.log({ev});
 	if (ev) {
 		storeUserSetting(ev.srcElement.id,ev.srcElement.value.toString());
 	}
@@ -335,31 +218,23 @@ function refreshLatest() {
 }
 
 
-function voteNow(wfpID, wfpName, actID, asmntID, itemID) {
-	if(typeof aras === "undefined"){
-		var aras = parent.parent.aras;
-	}
-	if(!aras) {
-		alert("aras is not specified.");
-		return;
-	}
-	var params = {};
-	params.aras = aras;
-	params.activity = aras.getItemById("Activity", actID, 1);
-	params.wflName = wfpName;
-	params.wflId = wfpID;
-	params.assignmentId = asmntID;
-	params.itemId = itemID;
-	params.dialogWidth = 700;
-	params.dialogHeight = 540;
-	params.resizable = true;
-	params.scroll = true;
-	params.content = "InBasket/InBasket-VoteDialog.aspx";
-	aras.getMostTopWindowWithAras(window).ArasModules.Dialog.show("iframe", params).promise.then(function (res) {
-	// Refresh inbasket on close
-	loadMyInbasketItemsToTable();
-	if (parent && parent.Core_loadProcessReport) {
-		parent.setTimeout(parent.Core_loadProcessReport, 0);
+function loadAllTables(searchValue) {
+	console.log({searchValue});
+	let table;
+	let userCheckbox;
+	let includeSwitchId;
+	let tableId;
+
+	itemDefinitions.forEach(function(itemDef, index, array) {
+		//console.log(itemDf, index);
+		includeSwitchId = itemDef.includeSwitchId;
+		tableId = itemDef.tableId;
+		userCheckbox = document.querySelector(`#${includeSwitchId}`);
+		table = document.querySelector(`#${tableId}`);;
+		table.innerHTML = "";
+		if (userCheckbox.checked) {
+			loadItemsToTable(table,itemDef,itemDef.typeName ,searchValue);
 		}
 	});
 }
+

@@ -3,12 +3,14 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="../styles/CommonStart.css" />
-		<script src="../javascript/CommonStart.js" ></script>
+		<script src="../javascript/CommonStartSearchDef.js" ></script>
+		<script src="../javascript/CommonStartController.js" ></script>
+		<script src="../javascript/CommonStartSearchUtils.js" ></script>
+		<script src="../javascript/CommonStartInbasket.js" ></script>
 	</head>
 	<body>
 		<!--<h2>Welcome!</h2> -->
 		<p class='content'>
-			Search or get latest modified items
 			<span id='motd'>
 				Message of the day <br/>
 				* Don't forget to take out the trash. <br/>
@@ -21,6 +23,7 @@
 			
 		</div>
 		<fieldset id='item-options'>
+				<!-- Search options-->
 				<legend>Options</legend>
 				<input type='button' id='searchItems' class='btn' name='searchItems' value='Search'/>
 				<input class='useroption' type='text' id='searchField' />
@@ -50,7 +53,13 @@
 					<span class="slider round"></span>
 					<div>CAD</div>
 				</label>
+				<label class="switch" for='includeECO'>
+					<input class='useroptionCb' type="checkbox" id='includeECO' checked />
+					<span class="slider round"></span>
+					<div>ECO</div>
+				</label>
 		</fieldset>
+		<!-- Inbasket -->
 		<div class='inbasket'>
 			<p class='header'>
 					My Inbasket
@@ -66,122 +75,43 @@
 			</div>
 		</div>
 		<br/>
+
+		<!-- Search results-->
 		<div class='item-tables'>
 	
 			<div id='resultMessage'></div>
 			
 			<!-- Data tables -->
-			<table id='last-parts' class='item-table'>
+			<table id='parts' class='item-table'>
 
 			</table>
 			<br/>
 			
-			<table id='last-documents' class='item-table'>
+			<table id='documents' class='item-table'>
 
 			</table>
 			<br/>
-			<table id='last-caddocuments' class='item-table'>
+			<table id='caddocuments' class='item-table'>
+
+			</table>
+			<br/>
+			<table id='ecos' class='item-table'>
 
 			</table>
 		<div>
 		<script>
 		
-		function loadAllTables(searchValue) {
-			console.log({searchValue});
-			var table;
-			var userCheckbox;
-			
-			// Parts
-			userCheckbox = document.querySelector("#includeParts");
-			table = document.querySelector("#last-parts");
-			table.innerHTML = "";
-			if (userCheckbox.checked) {
-				loadItemsToTable(table,partDef,"Part",searchValue);
-			}
-			
-			// Documents
-			userCheckbox = document.querySelector("#includeDocuments");
-			table = document.querySelector("#last-documents");
-			table.innerHTML = "";
-			if (userCheckbox.checked) {
-				loadItemsToTable(table,documentDef,"Document",searchValue);
-			}
-			
-			// CAD Documents
-			userCheckbox = document.querySelector("#includeCAD");
-			table = document.querySelector("#last-caddocuments");
-			table.innerHTML = "";
-			if (userCheckbox.checked) {
-				loadItemsToTable(table,cadDocumentDef,"CAD",searchValue);
-			}
-		}
-
-		// Define Parts
-		var partDefStr = '{"typeName":"Part", "metadata" : ' + 
-		'[ ' +
-		'{"property":"item_number", "header":"Part Number", "openlink":"true" } ,' + 
-		'{"property":"major_rev", "header":"Rev." } ,' + 
-		'{"property":"classification", "header":"Type"},' +
-		'{"property":"name", "header":"Name"},' + 
-		'{"property":"state", "header":"State"},' + 
-		'{"property":"modified_on", "header" : "Modified on", "isDate":"true"},' +
-		'{"property":"modified_by_id", "header":"Modified By", "keyed_name":"true"}' + 
-		']' +
-		' , "searchFields": ' +
-		'[ ' +
-			'{"property":"item_number"} ,' + 
-			'{"property":"name"}' + 
-		']' +
-		'}';
-		var partDef = JSON.parse(partDefStr);
-		
-		// Define Documents
-		var documentDefStr = '{"typeName":"Document", "metadata" : ' + 
-		'[ {"property":"item_number", "header":"Document Number", "openlink":"true" } ,' + 
-		'{"property":"classification", "header":"Type"},' +
-		'{"property":"name", "header":"Name"},' + 
-		'{"property":"state", "header":"State"},' + 
-		'{"property":"authoring_tool", "header":"Authoring Tool"},' + 
-		'{"property":"modified_on", "header" : "Modified on", "isDate":"true"}' +
-		']' + 
-		' , "searchFields": ' +
-		'[ ' +
-			'{"property":"item_number"} ,' + 
-			'{"property":"name"}' + 
-		']' +
-		'}';
-		var documentDef = JSON.parse(documentDefStr);
-		
-		// Define CAD Documents
-		var cadDocumentDefStr = '{"typeName":"CAD", "metadata" : ' + 
-		'[ {"property":"item_number", "header":"CAD Number", "openlink":"true" } ,' + 
-		'{"property":"classification", "header":"Type"},' +
-		'{"property":"name", "header":"Name"},' + 
-		'{"property":"state", "header":"State"},' + 
-		'{"property":"viewable_file", "header":"Viewable File", "isFile":"true"},' + 
-		'{"property":"authoring_tool", "header":"Authoring Tool"},' + 
-		'{"property":"modified_on", "header" : "Modified on", "isDate":"true"}' +
-		']' + 
-		' , "searchFields": ' +
-		'[ ' +
-			'{"property":"item_number"} ,' + 
-			'{"property":"name"}' + 
-		']' +
-		'}';
-		var cadDocumentDef = JSON.parse(cadDocumentDefStr);
-
-		
-		
+	
 	
 		// Bind double-click to open item
 		var t = document.querySelector(".item-tables");
 		t.addEventListener("dblclick", open);
 		
-		// Bind button to reload tables
+		// Bind button to getLatest
 		var btn = document.querySelector("#refreshItems");
 		btn.addEventListener("click", refreshLatest);
 		
-		// Bind button to reload tables
+		// Bind button to search
 		var btn2 = document.querySelector("#searchItems");
 		btn2.addEventListener("click", searchItems);
 		
@@ -216,10 +146,7 @@
 		// Load inbasket
 		loadMyInbasketItemsToTable();
 
-		// Load tables
-		//refreshLatest();
 		
-	
 
 		/*
 		// Requires OOTB mod: Support Tabs.js to open in background if Ctrl-button is held down
