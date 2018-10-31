@@ -51,7 +51,8 @@ p.header {
 
 .btn:active {	background-color: #44a0d0}
 
-.img_btn:hover {background-color: #e3e8ef}
+.img_btn {background-color: #f0f0f9}
+.img_btn:hover {background-color: #c8cfda}
 .img_btn:active {background-color: #bacff4}
 
 

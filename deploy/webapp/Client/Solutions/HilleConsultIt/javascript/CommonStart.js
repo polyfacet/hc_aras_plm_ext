@@ -8,10 +8,11 @@ var inbasketDefStr = '{"typeName":"InBasket Task", "metadata" : ' +
 '{"property":"item", "header":"Process Item", "openlink":"true", "keyed_name":"true" } ,' + 
 '{"property":"keyed_name", "header":"Activity"},' +
 '{"property":"instructions", "header":"Instructions"},' + 
-'{"property":"vote_now_input", "header":"Sign off", "voteNowInput":"true"},' + 
+'{"property":"vote_now_input", "header":"Sign Off", "voteNowInput":"true"},' + 
 '{"property":"start_date", "header" : "Start Date", "isDate":"true"},' +
 '{"property":"comments", "header" : "Comments"},' +
-'{"property":"classification", "header":"Workflow link"}' + 
+'{"property":"pid", "header" : "Workflow", "wfLink":"true"}' +
+//'{"property":"classification", "header":"Sign Off Report"}' + 
 ']' +
 ' , "searchFields": ' +
 '[ ' +
@@ -35,6 +36,19 @@ function getMyInbasketItems() {
 	var r = q.apply();
 	console.debug({r});
 	return r;
+}
+
+function openWorkflowProcess(pid,processName) {
+	var params = {};
+	params.aras = top.aras;
+	params.processID = pid;
+	params.processName = processName; // arasObj.getItemProperty(item, 'name');
+	params.dialogWidth = 840;
+	params.dialogHeight = 400;
+	params.content = 'WorkflowProcess/WflProcessViewer.aspx';
+
+	var win = top.aras.getMostTopWindowWithAras(window);
+	(win.main || win).ArasModules.Dialog.show('iframe', params);
 }
 
 function getLastItems(typeName, pageSize, onlyMine) {
@@ -186,6 +200,13 @@ function insertToTable(table, items, metaDef) {
 				var aElementString = `<a href='javascript:void(0)' onclick='voteNow("${wfpID}", "${wfpName}", "${actID}", "${activityAssignmentId}", "${sourceItemId}")'>${displayValue}</a> `;
 				newRow.insertCell().innerHTML = aElementString;
 			}
+			else if(metaDef.metadata[j].wfLink) {
+				var displayValue = "View Workflow";
+				var wfpID = item.getProperty(prop);
+				var wfpName = item.getProperty('pname');
+				var aElementString = `<a href='javascript:void(0)' onclick='openWorkflowProcess("${wfpID}", "${wfpName}")'>${displayValue}</a> `;
+				newRow.insertCell().innerHTML = aElementString;
+			}
 			else {
 				newRow.insertCell().textContent = item.getProperty(prop);
 			}
@@ -330,11 +351,13 @@ function voteNow(wfpID, wfpName, actID, asmntID, itemID) {
 	params.assignmentId = asmntID;
 	params.itemId = itemID;
 	params.dialogWidth = 700;
-	params.dialogHeight = 500;
+	params.dialogHeight = 540;
 	params.resizable = true;
 	params.scroll = true;
 	params.content = "InBasket/InBasket-VoteDialog.aspx";
 	aras.getMostTopWindowWithAras(window).ArasModules.Dialog.show("iframe", params).promise.then(function (res) {
+	// Refresh inbasket on close
+	loadMyInbasketItemsToTable();
 	if (parent && parent.Core_loadProcessReport) {
 		parent.setTimeout(parent.Core_loadProcessReport, 0);
 		}

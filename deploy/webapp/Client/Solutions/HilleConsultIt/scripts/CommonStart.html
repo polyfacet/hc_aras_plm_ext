@@ -62,27 +62,6 @@
 			<div id='inbasket-section'>
 				<input class="img_btn" width="32" height="32" type="image" id="refreshInbasket" onclick='loadMyInbasketItemsToTable()' src="../../../images/Refresh.svg"/>
 				<table id='inbasket-table'>
-					<!-- Dummy -->
-					<tr>
-						<th width="100">SourceItem Type</th>
-						<th width="150">Source Item Keyed Name with link to Source Item</th>
-						<th>Activity</th>
-						<th>Instructions</th>
-						<th>Open Signoff</th>
-						<th>Start Date</th>
-						<th>Comments</th>
-						<th>Workflow</th>
-					</tr>
-					<tr>
-						<td>ECO</td>
-						<td><a href='#'>920001</a></td>					
-						<td>Draft changes</td>
-						<td>Do this and that</td>
-						<td><a href='javascript:void(0)' onclick='voteNow("9D6EFE6EB58F4AAC9DDAE523C374B621","ECO-00001003","D110316B06204789B14BF00447CE5E2B","A8D30F4EF52F48EF99458C87E0CC4CDA","1A64B4581C8B4C7187FCEDBB0B765B5E")'>Signoff</a></td>
-						<td>2018-10-25</td>
-						<td>I will do this later.</td>
-						<td>ImageLink</td>
-					</tr>
 				</table>
 			</div>
 		</div>
@@ -233,6 +212,10 @@
 		
 		var inbasketCbChecked = document.querySelector("#inbasketCb").checked;
 		toggleVisbilityByElementId("inbasket-section",inbasketCbChecked);
+
+		// Load inbasket
+		loadMyInbasketItemsToTable();
+
 		// Load tables
 		//refreshLatest();
 		
