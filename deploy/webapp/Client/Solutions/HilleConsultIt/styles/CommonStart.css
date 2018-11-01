@@ -11,8 +11,14 @@ th,td {
 th {
 	background-color: #89b6ff;
 }
-th.tableCaption {
-	background-color: #ffffff;
+
+ul {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+div.tableCaption {
+	/* background-color: #ffffff; */
 	border: none;
 	text-align: left;
 }
@@ -127,4 +133,9 @@ label.switch {
 	margin-top:10px;
 	margin-left:10px;
 	margin-right:60px;
+}
+
+/* Sortable tables */
+table.sortable thead {
+    cursor: default;
 }

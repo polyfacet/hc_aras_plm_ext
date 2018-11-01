@@ -10,13 +10,8 @@
 		<script src="../javascript/Sortable.js" ></script>
 	</head>
 	<body>
-		<!--<h2>Welcome!</h2> -->
-		<p class='content'>
-			<span id='motd'>
-				Message of the day <br/>
-				* Don't forget to take out the trash. <br/>
-				* And do the laundry. <br/>
-				* Finish the tea.
+		<p>
+			<span id='motd' style="display: none">
 			</span>
 		</p>
 		
@@ -147,6 +142,8 @@
 		// Load inbasket
 		loadMyInbasketItemsToTable();
 
+		// Load Moth
+		loadMotd();
 		
 
 		/*

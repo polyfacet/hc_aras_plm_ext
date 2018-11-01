@@ -260,3 +260,13 @@ function loadAllTables(searchValue) {
 	});
 }
 
+function loadMotd() {
+	let q = top.aras.newIOMItem("Method", "HC_GetMotd");
+	let r = q.apply();
+	if (!r.isError()) {
+		let r1 =r.dom.firstChild.firstChild.firstChild.innerHTML.trim();
+		let motdEl = document.querySelector("#motd");
+		motdEl.innerHTML = r1;
+		motdEl.style.display = "block";
+	}
+}
