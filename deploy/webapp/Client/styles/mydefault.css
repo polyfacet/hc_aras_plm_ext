@@ -1,0 +1,65 @@
+﻿@import url("default.css");
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.overlay_close {
+  cursor: pointer;
+  background-color: lightcoral;
+  text-align: center;
+  padding: 4px;
+}
+
+#overlay_content {
+  position: absolute;
+  top: 15%;
+  left: 25%;
+}
+
+table#workflowMatrix {
+  border: 1px;
+  border-style: solid;
+  border-collapse: collapse;
+  background: whitesmoke;
+}
+
+td.ol,
+th.ol {
+  border: 1px;
+  border-style: solid;
+  padding: 0.4em;
+  text-align: center;
+}
+
+th.ol,
+td.firstCol {
+  background-color: lightgrey;
+}
+
+div.btn_my_wf {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: #FFFFFF;
+  background-color: #4eb5f1;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+div.btn_my_wf:hover {
+  background-color: #4095c6;
+}
