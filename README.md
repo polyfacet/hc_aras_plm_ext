@@ -10,6 +10,7 @@ Features in short:
 * Part variant creation
 * Tree Grid View example
 * A better BOM Compare
+* Starting page
 * Open in background (Not implemented)
 
 * Extended API:
@@ -45,7 +46,7 @@ Features in short:
  ## Usage
  1. Part validation concept:  Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI
  2. Part property coloring in grid, part variant creation and Tree Grid View: Youtube: https://youtu.be/tkUH0XZzqFU
- 3. A better BOM Compare: Youtube: https://youtu.be/jsfyDUVPpqs
+ 3. Starting page and a better BOM Compare: Youtube: https://youtu.be/jsfyDUVPpqs
  
  
  
