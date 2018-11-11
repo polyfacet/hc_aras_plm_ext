@@ -9,7 +9,7 @@ Features in short:
 * Part Property coloring in grid
 * Part variant creation
 * Tree Grid View example
-* A better BOM Compare (Not implemented)
+* A better BOM Compare
 * Open in background (Not implemented)
 
 * Extended API:
@@ -27,8 +27,10 @@ Features in short:
  
  ### Install steps
  #### Code Tree Installation
+ 0. (If not running SP12) Recompile https://github.com/hilleconsultit/hc_aras_core_lib for your specific version and modify method-config.xml (compare modifications between method-config.xml and method-config_R11SP12 in this project)
  1. Copy the Client folder located in deploy/webapp
  2. Paste into Innovator-folder (default: C:\Program Files (x86)\Aras\Innovator\Innovator)
+ 
  
  #### Database Installation
  1. Open up the Aras Package Import tool.
@@ -41,12 +43,9 @@ Features in short:
  8. Close the Aras Package Import tool.
  
  ## Usage
- 1. Login to Innovator
- 2. Navigate to the Part ItemType
- 3. Create a new part with no name set.
- 4. Notice the validation error in Form and the validation tab and the Parts grid colors
- 5. Select Action -> Create Variant on an existing Part. Notice the new property/field "Copied From" displayed on Part/Part form.
- 6. Customize rules by editing Method HC_PartGetValidations, HC_PartSetGridCss and HC_CreatePartClone_Generic
+ 1. Part validation concept:  Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI
+ 2. Part property coloring in grid, part variant creation and Tree Grid View: Youtube: https://youtu.be/tkUH0XZzqFU
+ 3. A better BOM Compare: Youtube: https://youtu.be/jsfyDUVPpqs
  
  
- Youtube: https://www.youtube.com/watch?v=WJLfYEj_thI
+ 
