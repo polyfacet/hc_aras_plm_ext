@@ -1,0 +1,8 @@
+<AML>
+  <Item type="Value" action="add" id="EF8ECA4FF8EA41EDB93026D72AAFB2FB">
+	<label xml:lang="en">HC Start</label>
+	<sort_order>386</sort_order>
+	<source_id keyed_name="StartingPage List" type="List">BFDEFE0CEE174B52B8972D49B446B812</source_id>
+	<value>HC Start</value>
+  </Item>
+</AML>

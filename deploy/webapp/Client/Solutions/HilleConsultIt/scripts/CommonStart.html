@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../styles/CommonStart.css" />
+		<script src="../javascript/CommonStartSearchDef.js" ></script>
+		<script src="../javascript/CommonStartController.js" ></script>
+		<script src="../javascript/CommonStartSearchUtils.js" ></script>
+		<script src="../javascript/CommonStartInbasket.js" ></script>
+		<script src="../javascript/Sortable.js" ></script>
+	</head>
+	<body>
+		<p>
+			<span id='motd' style="display: none">
+			</span>
+		</p>
+		
+		<div id='top-panel'>
+			
+		</div>
+		<fieldset id='item-options'>
+				<!-- Search options-->
+				<legend>Options</legend>
+				<input type='button' id='searchItems' class='btn' name='searchItems' value='Search'/>
+				<input class='useroption' type='text' id='searchField' />
+				<label for='onlyLatestReleased'>Latest Released</label>
+				<input class='useroptionCb' type='checkbox' id='onlyLatestReleased' name='onlyLatestReleased' checked />
+				<br/>
+				<input type='button' id='refreshItems' class='btn' name='refreshItems' value='Latest modified'/>
+				<label for='onlyMine'>Only by me</label>
+				<input class='useroptionCb' type='checkbox' id='onlyMine' name='onlyMine' checked />
+				<br/>
+				<label for='itemLimit'>Max Result Count</label>
+				<input class='useroption' type='number' id='itemLimit' name='itemLimit' placeholder='10' step='1' value='10' max='50' />
+				<br/>
+				<!-- Item type on/off -->
+				<label class="switch" for='includeParts'>
+					<input class='useroptionCb' type="checkbox" id='includeParts' checked />
+					<span class="slider round"></span>
+					<div>Parts</div>
+				</label>
+				<label class="switch" for='includeDocuments'>
+					<input class='useroptionCb' type="checkbox" id='includeDocuments' checked />
+					<span class="slider round"></span>
+					<div>Documents</div>
+				</label>
+				<label class="switch" for='includeCAD'>
+					<input class='useroptionCb' type="checkbox" id='includeCAD' checked />
+					<span class="slider round"></span>
+					<div>CAD</div>
+				</label>
+				<label class="switch" for='includeECO'>
+					<input class='useroptionCb' type="checkbox" id='includeECO' checked />
+					<span class="slider round"></span>
+					<div>ECO</div>
+				</label>
+		</fieldset>
+		<!-- Inbasket -->
+		<div class='inbasket'>
+			<p class='header'>
+					My Inbasket
+				<label class="switch" for='inbasketCb'>
+					<input class='useroptionCb' type="checkbox" id='inbasketCb' checked/>
+					<span class="slider round"></span>
+				</label>
+			</p>
+			<div id='inbasket-section'>
+				<input class="img_btn" width="32" height="32" type="image" id="refreshInbasket" onclick='loadMyInbasketItemsToTable()' src="../../../images/Refresh.svg"/>
+				<table id='inbasket-table'>
+				</table>
+			</div>
+		</div>
+		<br/>
+
+		<!-- Search results-->
+		<div class='item-tables'>
+	
+			<div id='resultMessage'></div>
+			
+			<!-- Data tables -->
+			<table id='parts' class='item-table'>
+
+			</table>
+			<br/>
+			
+			<table id='documents' class='item-table'>
+
+			</table>
+			<br/>
+			<table id='caddocuments' class='item-table'>
+
+			</table>
+			<br/>
+			<table id='ecos' class='item-table'>
+
+			</table>
+		<div>
+		<script>
+		
+	
+	
+		// Bind double-click to open item
+		var t = document.querySelector(".item-tables");
+		t.addEventListener("dblclick", open);
+		
+		// Bind button to getLatest
+		var btn = document.querySelector("#refreshItems");
+		btn.addEventListener("click", refreshLatest);
+		
+		// Bind button to search
+		var btn2 = document.querySelector("#searchItems");
+		btn2.addEventListener("click", searchItems);
+		
+		
+		// Load user settings for checkboxes and bind checkbox clicks
+		var userCheckboxes = document.querySelectorAll(".useroptionCb");
+		for (var i=0; i<userCheckboxes.length;i++) {
+			var userCheckbox = userCheckboxes[i];
+			var userValue = getUserSetting(userCheckbox.id);
+			if (userValue !== null) {
+				userCheckbox.checked = (userValue == 'true');
+			}
+			// Bind event
+			userCheckbox.addEventListener("click", toggleCb);
+		}
+		
+		// Load user settings for other and bind changes
+		var userOptions = document.querySelectorAll(".useroption");
+		for (var i=0; i<userOptions.length;i++) {
+			var userOption = userOptions[i];
+			var userValue = getUserSetting(userOption.id);
+			if (userValue !== null) {
+				userOption.value = userValue;
+			}
+			// Bind event
+			userOption.addEventListener("change", setUserOption);
+		}
+		
+		var inbasketCbChecked = document.querySelector("#inbasketCb").checked;
+		toggleVisbilityByElementId("inbasket-section",inbasketCbChecked);
+
+		// Load inbasket
+		loadMyInbasketItemsToTable();
+
+		// Load Moth
+		loadMotd();
+		
+
+		/*
+		// Requires OOTB mod: Support Tabs.js to open in background if Ctrl-button is held down
+		var ctrlDownOnClick = false;
+		if (t != null ) {
+			t.addEventListener("click", ctrlDownOnClickEv);
+		}
+		function ctrlDownOnClickEv(ev) {
+			console.log("ctrlDownOnClickEv event triggered");
+			ctrlDownOnClick = false;
+			if (ev.ctrlKey) {ctrlDownOnClick = true;}
+			top.aras.utils.setCtrlButtonStateDown(ctrlDownOnClick);
+		}
+		*/
+		
+		</script>
+		
+		
+	</body>
+
+</html>
