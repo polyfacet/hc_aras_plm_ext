@@ -2,8 +2,8 @@ var overlayId = "overlay";
 var overlay_close_id = "overlay_close";
 var ol_tableId = "workflowMatrix";
 
-class Overlay {
-    constructor() {
+function Overlay() {
+    this.init = function () {
         document.addEventListener("DOMContentLoaded", function (event) {
             console.log("DOM fully loaded and parsed");
             var btn2 = document.querySelector("#btn_my_wf");
@@ -12,24 +12,24 @@ class Overlay {
         });
     }
 
-    on() {
+    this.on = function() {
         console.log("on");
-        Overlay.prototype.loadTable(null, ol_tableId);
+        loadTable(null, ol_tableId);
         document.getElementById(overlayId).style.display = "block";
     }
 
-    off() {
+    this.off = function() {
         console.log("off");
         document.getElementById(overlayId).style.display = "none";
     }
 
-    loadTable(aras, tableId) {
+    var loadTable = function(aras, tableId) {
         console.log("Load table");
         let table = document.getElementById(tableId);
         table.innerHTML = "";
         let thead = table.createTHead();
         let headRow = thead.insertRow();
-        let tableDef = this.getDefinition(aras);
+        let tableDef = getDefinition(aras);
         tableDef.headers.forEach(element => {
             let th = document.createElement("th");
             th.className = "ol";
@@ -54,36 +54,38 @@ class Overlay {
         console.log("Table loaded");
     }
 
-    getDefinition(aras) {
-        return Dataloader.getDefinition(aras);
+    var getDefinition = function(aras) {
+        var dl = new Dataloader();
+        return dl.getDefinition(aras);
         //return headerDef;
     }
 }
 
-class Dataloader {
-    constructor() {};
-    static getDefinition(aras) {
-        return Dataloader.prototype.headerDef;
+function Dataloader() {
+    
+    this.getDefinition = function(aras) {
+        return headerDef();
     }
 
     /* DUMMY START */
-    get headerDefStr() {
+    var headerDefStr = function() {
         let val = '{"headers" : ' +
-        '[ ' +
-        '{"header":"Role" } ,' +
-        '{"header":"Prepare" } ,' +
-        '{"header":"Work"},' +
-        '{"header" : "Approve"}' +
-        ']' +
-        ' , "rows": { "row": [ { "cells": [ "Creator", "X", "X", "" ] }, { "cells": [ "Chief", "", "", "Kalle Kula<br/>Jan Banan" ] } ] } ' +
-        '}';
+            '[ ' +
+            '{"header":"Role" } ,' +
+            '{"header":"Prepare" } ,' +
+            '{"header":"Work"},' +
+            '{"header" : "Approve"}' +
+            ']' +
+            ' , "rows": { "row": [ { "cells": [ "Creator", "X", "X", "" ] }, { "cells": [ "Chief", "", "", "Kalle Kula<br/>Jan Banan" ] } ] } ' +
+            '}';
         return val;
-    } 
-    get headerDef() {
-        let val = JSON.parse(Dataloader.prototype.headerDefStr);
+    }
+    var headerDef = function() {
+        let val = JSON.parse(headerDefStr());
         return val;
-    } 
+    }
     /* DUMMY END */
 }
 
 var overL = new Overlay();
+overL.init();
