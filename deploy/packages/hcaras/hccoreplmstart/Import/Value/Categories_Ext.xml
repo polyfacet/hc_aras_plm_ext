@@ -1,0 +1,8 @@
+﻿<AML>
+ <Item type="Value" id="C792FFE1E4784BCA855B1BCE2E9BBCE0" action="add">
+  <label xml:lang="en">_Getting Started_</label>
+  <sort_order>10010</sort_order>
+  <source_id keyed_name="Categories" type="List">EAB29654E2CD4D30B376957788198B40</source_id>
+  <value>_Getting Started_</value>
+ </Item>
+</AML>
