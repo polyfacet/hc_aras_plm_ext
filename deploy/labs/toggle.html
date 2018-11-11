@@ -1,0 +1,22 @@
+
+<!-- Uses mydefault.css som extndar default.css-->
+<div class="btn_my_wf" onclick="toggle()">
+    Toggle</div>
+<script>
+    function toggle(off) {
+        // refName = Den hårdkodade variabeln som varierar med fieldSet
+        let refName = "hc_group_1";
+        let selector = `div[name='${refName}']`;
+        let el = document.querySelector(selector);
+        let table =  el.querySelector("table");
+        let displayState = table.style.display;
+        //console.log({displayState});
+        if (off || displayState === "" || displayState === "block") {
+            table.style.display = "none";
+        }
+        else {
+            table.style.display = "block";
+        }
+    }
+    toggle(true);
+</script>
