@@ -1,0 +1,81 @@
+﻿<AML>
+ <Item type="Method" id="BF72795B35E04873B0BB239B90C5C58A" action="add">
+  <comments>Gets custom Inbasket items for client</comments>
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA[// Gets custom Inbasket items for client
+Dictionary<string,string> typeLabelMap = new Dictionary<string,string>();
+typeLabelMap.Add("CBA93BEFFB4F499CAF122CB79E204983", "ECO");
+
+Innovator inn = this.getInnovator();
+string amlQuery = @"<AML><Item type='InBasket Task' action='get' returnMode='itemsOnly' orderBy='start_date DESC'>
+				<status condition='eq'>Active</status>
+				<my_assignment condition='eq'>1</my_assignment>
+			</Item></AML>";
+			
+			
+Item result = inn.applyAML(amlQuery);
+
+//Extract additional info from Inbasket Tasks/Workflow Tasks
+for(int i =0;i<result.getItemCount();i++) {
+    Item wfTask = result.getItemByIndex(i);
+    string key = wfTask.getProperty("item_type_id");
+    string typeName = key; 
+    if (typeLabelMap.ContainsKey(key)) {
+        typeName = typeLabelMap[key];
+    }
+    
+    // Get wfpID, wfpName, actID, asmntID, itemID as , separated id string.... itemID = SourceItem id ,e.g. Express ECO id
+    string wfTaskId = wfTask.getID();
+    string activityAssignmentId = wfTaskId; // Magic! These ids match.
+    
+    amlQuery = @"
+    <AML>
+    	<Item action='get' type='Workflow Process' select='name'>
+    		<Relationships>
+    			<Item action='get' type='Workflow Process Activity'>
+    				<related_id>
+    					<Item action='get' type='Activity' select='id'>
+    						<Relationships>
+    							<Item action='get' type='Activity Assignment' select='id,comments'>
+    								<id>{0}</id>
+    							</Item>
+    						</Relationships>
+    					</Item>
+    				</related_id>
+    			</Item>
+    		</Relationships>
+    	</Item>
+    </AML>";
+    
+    amlQuery = String.Format(amlQuery,wfTaskId);
+    Item res = inn.applyAML(amlQuery);
+    string wfpID =res.getID();
+    string wfpName = res.getProperty("name");
+    string actID = res.getItemsByXPath("//Item[@type='Activity']").getItemByIndex(0).getID();
+    string itemId = wfTask.getProperty("item");
+    StringBuilder sb = new StringBuilder();
+    sb.AppendFormat("{0},", wfpID);
+    sb.AppendFormat("{0},", wfpName);
+    sb.AppendFormat("{0},", actID);
+    sb.AppendFormat("{0},", activityAssignmentId);
+    sb.AppendFormat("{0}", itemId);
+    string voteNowInput = sb.ToString();
+    
+    string comments = res.getItemsByXPath("//Item[@type='Activity Assignment']").getItemByIndex(0).getProperty("comments","");
+    
+    // Append properties
+    result.getItemByIndex(i).setProperty("vote_now_input", voteNowInput);
+    result.getItemByIndex(i).setProperty("item_type_name", typeName);
+    result.getItemByIndex(i).setProperty("comments", comments);
+    result.getItemByIndex(i).setProperty("pid", wfpID);
+    result.getItemByIndex(i).setProperty("pname", wfpName);
+    
+    
+}
+
+return result;
+]]></method_code>
+  <method_type>C#</method_type>
+  <name>HC_GetMyInbasketTasks</name>
+ </Item>
+</AML>
