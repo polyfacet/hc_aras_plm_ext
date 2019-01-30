@@ -1,3 +1,8 @@
+<!-- Replace with unique/specific:
+    toggleHandler_X
+    fieldSetProperty_X
+    fieldSet_X
+-->
 
 <!-- Uses mydefault.css which extends default.css-->
 <!-- Replace fieldSet_X with unique id-->
@@ -7,9 +12,12 @@
 </label>
 <script>
     
+    const on = "on";
+    const off = "off";
+
     var toggleHandler_X = {
-        refName:  "hc_group_1" , // refName =  The harcoded variable which varies with each fieldSet
-        checkboxId: "fieldSet_X", // refName =  The harcoded variable which varies with each fieldSet
+        refName:  "fieldSetProperty_X" , // refName =  The harcoded variable which varies with each fieldSet
+        checkboxId: "fieldSet_X", // reference id of checkbox input
         storeSettingsMode: "true", // Enable/Disable stored settings mode
 
         toggle: function(onOff) {
@@ -25,20 +33,24 @@
                 table.style.display = "block";
                 if (this.storeSettingsMode) localStorage.setItem(this.refName,on);
             }
+        },
+
+        onload: function(onOff) {
+
+            let onloadOnOff = onOff;
+            if (this.storeSettingsMode) {
+                let storedOnOffvalue = localStorage.getItem(this.refName);
+                if (storedOnOffvalue) onloadOnOff = storedOnOffvalue;
+            }
+            if (onloadOnOff === on) {
+                let checkboxInput = document.getElementById(this.checkboxId);
+                checkboxInput.checked = true;
+            }
+            this.toggle(onloadOnOff);
         }
     }
    
-    const on = "on";
-    const off = "off";
-
-    let onloadOnOff = off;
-    if (toggleHandler_X.storeSettingsMode) {
-        let storedOnOffvalue = localStorage.getItem(toggleHandler_X.refName);
-        if (storedOnOffvalue) onloadOnOff = storedOnOffvalue;
-    }
-    if (onloadOnOff === on) {
-        let checkboxInput = document.getElementById(toggleHandler_X.checkboxId);
-        checkboxInput.checked = true;
-    }
-    toggleHandler_X.toggle(onloadOnOff);
+    toggleHandler_X.onload("off"); // Default off 
+    
+    
 </script>
