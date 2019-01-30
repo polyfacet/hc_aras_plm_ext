@@ -12,8 +12,9 @@
 </label>
 <script>
     
-    const on = "on";
-    const off = "off";
+    // "Constanst" if not already declared by other toggler
+    if (!on) var on = "on";
+    if (!off) var off = "off";
 
     var toggleHandler_X = {
         refName:  "fieldSetProperty_X" , // refName =  The harcoded variable which varies with each fieldSet
