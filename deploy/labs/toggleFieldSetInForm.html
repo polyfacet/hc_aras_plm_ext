@@ -1,12 +1,16 @@
 
 <!-- Uses mydefault.css which extends default.css-->
+<!-- Replace fieldSet_X with unique id-->
 <label class="switch" for='fieldSet_X'>
     <input class='useroptionCb'  onclick="toggle()" type="checkbox" id='fieldSet_X'  />
     <span class="slider round"></span>
 </label>
 <script>
-    // refName =  The harcoded variable which varies with each fieldSet
-    const refName = "hc_group_1";
+    
+    const refName = "hc_group_1"; // refName =  The harcoded variable which varies with each fieldSet
+    const checkboxId = "fieldSet_X"; // This value must match the id of the html checkbox input
+    const storeSettingsMode = "true"; // Enable/Disable stored settings mode
+        
     const on = "on";
     const off = "off";
     function toggle(onOff) {
@@ -16,10 +20,25 @@
         let displayState = table.style.display;
         if (onOff === off || displayState === "block") {
             table.style.display = "none";
+            if (storeSettingsMode) localStorage.setItem(refName,off);
         }
         else {
             table.style.display = "block";
+            if (storeSettingsMode) localStorage.setItem(refName,on);
         }
     }
-    toggle(off);
+
+    let onloadOnOff = off;
+    
+    if (storeSettingsMode) {
+        let storedOnOffvalue = localStorage.getItem(refName);
+        if (storedOnOffvalue) onloadOnOff = storedOnOffvalue;
+    }
+    
+    
+    if (onloadOnOff === on) {
+        let checkboxInput = document.getElementById(checkboxId);
+        checkboxInput.checked = true;
+    }
+    toggle(onloadOnOff);
 </script>
