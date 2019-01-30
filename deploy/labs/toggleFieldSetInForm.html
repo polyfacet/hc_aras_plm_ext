@@ -2,43 +2,43 @@
 <!-- Uses mydefault.css which extends default.css-->
 <!-- Replace fieldSet_X with unique id-->
 <label class="switch" for='fieldSet_X'>
-    <input class='useroptionCb'  onclick="toggle()" type="checkbox" id='fieldSet_X'  />
+    <input class='useroptionCb'  onclick="toggleHandler_X.toggle()" type="checkbox" id='fieldSet_X'  />
     <span class="slider round"></span>
 </label>
 <script>
     
-    const refName = "hc_group_1"; // refName =  The harcoded variable which varies with each fieldSet
-    const checkboxId = "fieldSet_X"; // This value must match the id of the html checkbox input
-    const storeSettingsMode = "true"; // Enable/Disable stored settings mode
-        
+    var toggleHandler_X = {
+        refName:  "hc_group_1" , // refName =  The harcoded variable which varies with each fieldSet
+        checkboxId: "fieldSet_X", // refName =  The harcoded variable which varies with each fieldSet
+        storeSettingsMode: "true", // Enable/Disable stored settings mode
+
+        toggle: function(onOff) {
+            let selector = `div[name='${this.refName}']`;
+            let el = document.querySelector(selector);
+            let table =  el.querySelector("table");
+            let displayState = table.style.display;
+            if (onOff === off || displayState === "block") {
+                table.style.display = "none";
+                if (this.storeSettingsMode) localStorage.setItem(this.refName,off);
+            }
+            else {
+                table.style.display = "block";
+                if (this.storeSettingsMode) localStorage.setItem(this.refName,on);
+            }
+        }
+    }
+   
     const on = "on";
     const off = "off";
-    function toggle(onOff) {
-        let selector = `div[name='${refName}']`;
-        let el = document.querySelector(selector);
-        let table =  el.querySelector("table");
-        let displayState = table.style.display;
-        if (onOff === off || displayState === "block") {
-            table.style.display = "none";
-            if (storeSettingsMode) localStorage.setItem(refName,off);
-        }
-        else {
-            table.style.display = "block";
-            if (storeSettingsMode) localStorage.setItem(refName,on);
-        }
-    }
 
     let onloadOnOff = off;
-    
-    if (storeSettingsMode) {
-        let storedOnOffvalue = localStorage.getItem(refName);
+    if (toggleHandler_X.storeSettingsMode) {
+        let storedOnOffvalue = localStorage.getItem(toggleHandler_X.refName);
         if (storedOnOffvalue) onloadOnOff = storedOnOffvalue;
     }
-    
-    
     if (onloadOnOff === on) {
-        let checkboxInput = document.getElementById(checkboxId);
+        let checkboxInput = document.getElementById(toggleHandler_X.checkboxId);
         checkboxInput.checked = true;
     }
-    toggle(onloadOnOff);
+    toggleHandler_X.toggle(onloadOnOff);
 </script>
