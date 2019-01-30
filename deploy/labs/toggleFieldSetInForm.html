@@ -1,0 +1,25 @@
+
+<!-- Uses mydefault.css which extends default.css-->
+<label class="switch" for='fieldSet_X'>
+    <input class='useroptionCb'  onclick="toggle()" type="checkbox" id='fieldSet_X'  />
+    <span class="slider round"></span>
+</label>
+<script>
+    // refName =  The harcoded variable which varies with each fieldSet
+    const refName = "hc_group_1";
+    const on = "on";
+    const off = "off";
+    function toggle(onOff) {
+        let selector = `div[name='${refName}']`;
+        let el = document.querySelector(selector);
+        let table =  el.querySelector("table");
+        let displayState = table.style.display;
+        if (onOff === off || displayState === "block") {
+            table.style.display = "none";
+        }
+        else {
+            table.style.display = "block";
+        }
+    }
+    toggle(off);
+</script>
