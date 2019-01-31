@@ -1,8 +1,28 @@
 <AML>
+    <Item type="Field" id="12D4D51043614BD989E0DA400682231F" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>groupbox</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <legend xml:lang="en">Food Properties</legend>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>5248</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>742</x>
+      <y>34</y>
+      <name>food_properties</name>
+     </Item>
      <Item type="Field" id="3AB862A9139F4178A09AD1EB50648C27" action="add">
       <bg_color>#ffffff</bg_color>
       <border_width>0</border_width>
-      <container>Food Properties</container>
+      <container>food_properties</container>
       <display_length_unit>px</display_length_unit>
       <field_type>checkbox</field_type>
       <font_color>#000000</font_color>
@@ -12,19 +32,20 @@
       <is_disabled>0</is_disabled>
       <is_visible>1</is_visible>
       <label xml:lang="en">Gluten Free</label>
-      <label_position>top</label_position>
+      <label_position>right</label_position>
       <list_no_blank>0</list_no_blank>
       <propertytype_id keyed_name="is_gluten_free" type="Property">B2B1BC67EAC7406F87100A6363AB1411</propertytype_id>
       <sort_order>4864</sort_order>
       <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
       <tab_index>95256</tab_index>
       <tab_stop>1</tab_stop>
-      <x>756</x>
-      <y>56</y>
+      <x>0</x>
+      <y>50</y>
       <name>is_gluten_free</name>
      </Item>
      <Item type="Field" id="9FE1AFE18EB34912A4B0E962E0FBAE96" action="add">
       <border_width>0</border_width>
+      <container>food_properties</container>
       <display_length_unit>px</display_length_unit>
       <field_type>checkbox</field_type>
       <font_color>#000000</font_color>
@@ -34,15 +55,15 @@
       <is_disabled>0</is_disabled>
       <is_visible>1</is_visible>
       <label xml:lang="en">Lactose Free</label>
-      <label_position>top</label_position>
+      <label_position>right</label_position>
       <list_no_blank>0</list_no_blank>
       <propertytype_id keyed_name="is_lactose_free" type="Property">12DF351CCD2645D18FA60A0180F2A47C</propertytype_id>
       <sort_order>4992</sort_order>
       <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
       <tab_index>95384</tab_index>
       <tab_stop>1</tab_stop>
-      <x>756</x>
-      <y>94</y>
+      <x>0</x>
+      <y>80</y>
       <name>is_lactose_free</name>
      </Item>
      <Item type="Field" id="302D65A01414454298B5631D6BE9F7FF" action="add">
@@ -68,7 +89,7 @@
       <name>is_sales_item</name>
      </Item>
      <Item type="Field" id="8B7E93DFA7FD41F88979E6D63AB82874" action="add">
-      <container>Food Properties</container>
+      <container>food_properties</container>
       <display_length_unit>px</display_length_unit>
       <field_type>checkbox</field_type>
       <font_color>#000000</font_color>
@@ -78,19 +99,19 @@
       <is_disabled>0</is_disabled>
       <is_visible>1</is_visible>
       <label xml:lang="en">Vegeterian</label>
-      <label_position>top</label_position>
-      <legend xml:lang="en">Food Properties</legend>
+      <label_position>right</label_position>
       <list_no_blank>0</list_no_blank>
       <propertytype_id keyed_name="is_vegeterian" type="Property">73BA8DBD53A04B99970621786A6DD321</propertytype_id>
       <sort_order>4736</sort_order>
       <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
       <tab_index>95128</tab_index>
       <tab_stop>1</tab_stop>
-      <x>756</x>
-      <y>5</y>
+      <x>0</x>
+      <y>20</y>
       <name>is_vegeterian</name>
      </Item>
      <Item type="Field" id="4752DBA363C94FD68FAFCA698F29C8A3" action="add">
+      <container>food_properties</container>
       <display_length_unit>px</display_length_unit>
       <field_type>checkbox</field_type>
       <font_color>#000000</font_color>
@@ -100,15 +121,15 @@
       <is_disabled>0</is_disabled>
       <is_visible>1</is_visible>
       <label xml:lang="en">Ecologic</label>
-      <label_position>top</label_position>
+      <label_position>right</label_position>
       <list_no_blank>0</list_no_blank>
       <propertytype_id keyed_name="is_ecologic" type="Property">E3051DB495254A778BC4F0FFE3DF0C85</propertytype_id>
       <sort_order>4865</sort_order>
       <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
       <tab_index>95257</tab_index>
       <tab_stop>1</tab_stop>
-      <x>756</x>
-      <y>134</y>
+      <x>0</x>
+      <y>110</y>
       <name>is_ecologic</name>
      </Item>
 	  <Item type="Field" id="F4E6454AD43741A6862D771603A3FE15" action="add">
@@ -135,6 +156,85 @@
 		<y>257</y>
 		<name>hc_latest_change_note</name>
 	  </Item>
+	 <Item type="Field" id="07EBD3CBAE5C4FE0B5E2F7C58BB9A902" action="add">
+      <border_width>0</border_width>
+      <display_length_unit>px</display_length_unit>
+      <field_type>html</field_type>
+      <font_color>#000000</font_color>
+      <font_family>tahoma, arial, helvetica, sans-serif</font_family>
+      <font_size>8pt</font_size>
+      <font_weight>bold</font_weight>
+      <html_code><![CDATA[<!-- Replace with unique/specific:
+    toggleFoodProperties
+    food_properties
+    food_properties_toggle
+-->
+
+<!-- Uses mydefault.css which extends default.css-->
+<!-- Replace food_properties_toggle with unique id-->
+<label class="switch" for='food_properties_toggle'>
+    <input class='useroptionCb'  onclick="toggleFoodProperties.toggle()" type="checkbox" id='food_properties_toggle'  />
+    <span class="slider round"></span>
+</label>
+<script>
+    
+    // "Constanst" if not already declared by other toggler
+    if (!on) var on = "on";
+    if (!off) var off = "off";
+
+    var toggleFoodProperties = {
+        refName:  "food_properties" , // refName =  The harcoded variable which varies with each fieldSet
+        checkboxId: "food_properties_toggle", // reference id of checkbox input
+        storeSettingsMode: "true", // Enable/Disable stored settings mode
+
+        toggle: function(onOff) {
+            let selector = `div[name='${this.refName}']`;
+            let el = document.querySelector(selector);
+            let table =  el.querySelector("table");
+            let displayState = table.style.display;
+            if (onOff === off || displayState === "block") {
+                table.style.display = "none";
+                if (this.storeSettingsMode) localStorage.setItem(this.refName,off);
+            }
+            else {
+                table.style.display = "block";
+                if (this.storeSettingsMode) localStorage.setItem(this.refName,on);
+            }
+        },
+
+        onload: function(onOff) {
+
+            let onloadOnOff = onOff;
+            if (this.storeSettingsMode) {
+                let storedOnOffvalue = localStorage.getItem(this.refName);
+                if (storedOnOffvalue) onloadOnOff = storedOnOffvalue;
+            }
+            if (onloadOnOff === on) {
+                let checkboxInput = document.getElementById(this.checkboxId);
+                checkboxInput.checked = true;
+            }
+            this.toggle(onloadOnOff);
+        }
+    }
+   
+    toggleFoodProperties.onload("off"); // Default off 
+    
+    
+</script>]]></html_code>
+      <is_disabled>0</is_disabled>
+      <is_visible>1</is_visible>
+      <label_position>top</label_position>
+      <list_no_blank>0</list_no_blank>
+      <sort_order>5376</sort_order>
+      <source_id keyed_name="83907DEF8B3044A08BDCBB77B1C0517E" type="Body">83907DEF8B3044A08BDCBB77B1C0517E</source_id>
+      <tab_stop>1</tab_stop>
+      <x>730</x>
+      <y>4</y>
+      <name>food_prop_toggle</name>
+     </Item>
 	 
+	<Item type="Form" id="CAF99D0A8E6E44E9A681C38015FACE91" action="edit">
+		<stylesheet><![CDATA[../styles/mydefault.css]]></stylesheet>
+	</Item>
 	 
 </AML>
