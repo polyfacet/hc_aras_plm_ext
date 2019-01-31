@@ -1,0 +1,57 @@
+<!-- Replace with unique/specific:
+    toggleHandler_X
+    fieldSetProperty_X
+    fieldSet_X
+-->
+
+<!-- Uses mydefault.css which extends default.css-->
+<!-- Replace fieldSet_X with unique id-->
+<label class="switch" for='fieldSet_X'>
+    <input class='useroptionCb'  onclick="toggleHandler_X.toggle()" type="checkbox" id='fieldSet_X'  />
+    <span class="slider round"></span>
+</label>
+<script>
+    
+    // "Constanst" if not already declared by other toggler
+    if (!on) var on = "on";
+    if (!off) var off = "off";
+
+    var toggleHandler_X = {
+        refName:  "fieldSetProperty_X" , // refName =  The harcoded variable which varies with each fieldSet
+        checkboxId: "fieldSet_X", // reference id of checkbox input
+        storeSettingsMode: "true", // Enable/Disable stored settings mode
+
+        toggle: function(onOff) {
+            let selector = `div[name='${this.refName}']`;
+            let el = document.querySelector(selector);
+            let table =  el.querySelector("table");
+            let displayState = table.style.display;
+            if (onOff === off || displayState === "block") {
+                table.style.display = "none";
+                if (this.storeSettingsMode) localStorage.setItem(this.refName,off);
+            }
+            else {
+                table.style.display = "block";
+                if (this.storeSettingsMode) localStorage.setItem(this.refName,on);
+            }
+        },
+
+        onload: function(onOff) {
+
+            let onloadOnOff = onOff;
+            if (this.storeSettingsMode) {
+                let storedOnOffvalue = localStorage.getItem(this.refName);
+                if (storedOnOffvalue) onloadOnOff = storedOnOffvalue;
+            }
+            if (onloadOnOff === on) {
+                let checkboxInput = document.getElementById(this.checkboxId);
+                checkboxInput.checked = true;
+            }
+            this.toggle(onloadOnOff);
+        }
+    }
+   
+    toggleHandler_X.onload("off"); // Default off 
+    
+    
+</script>

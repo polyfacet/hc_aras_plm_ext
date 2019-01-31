@@ -1,0 +1,58 @@
+﻿<AML>
+ <Item type="ItemType" id="9F2B9CEAC4A8438E8E653B2E6CE1EBEA" action="add">
+  <allow_private_permission>1</allow_private_permission>
+  <auto_search>0</auto_search>
+  <enforce_discovery>1</enforce_discovery>
+  <hide_where_used>0</hide_where_used>
+  <implementation_type>table</implementation_type>
+  <instance_data>HC_START</instance_data>
+  <is_dependent>0</is_dependent>
+  <is_relationship>0</is_relationship>
+  <is_versionable>0</is_versionable>
+  <label xml:lang="en">Start</label>
+  <label_plural xml:lang="en">Start</label_plural>
+  <large_icon>../Images/ResetView.svg</large_icon>
+  <open_icon>../Images/ResetView.svg</open_icon>
+  <revisions keyed_name="Default" type="Revision">7FE395DD8B9F4E1090756A34B733D75E</revisions>
+  <show_parameters_tab>1</show_parameters_tab>
+  <structure_view>tabs off</structure_view>
+  <unlock_on_logout>0</unlock_on_logout>
+  <use_src_access>0</use_src_access>
+  <name>HC Start</name>
+  <Relationships>
+   <Item type="View" id="19A171D2753842A685BE2A6FA00334FB" action="add">
+    <client>js</client>
+    <related_id keyed_name="HC Start" type="Form">7297EC210BF14523877F198A67DD51FA</related_id>
+    <role keyed_name="World" type="Identity">
+     <Item type="Identity" action="get" select="id">
+      <name>World</name>
+     </Item>
+    </role>
+    <show_ssvc>0</show_ssvc>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Start" type="ItemType" name="HC Start">9F2B9CEAC4A8438E8E653B2E6CE1EBEA</source_id>
+    <type>default</type>
+   </Item>
+   <Item type="TOC Access" id="1072FB97455B4E7F996420DE141C86EE" action="add">
+    <related_id keyed_name="World" type="Identity">
+     <Item type="Identity" action="get" select="id">
+      <name>World</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Start" type="ItemType" name="HC Start">9F2B9CEAC4A8438E8E653B2E6CE1EBEA</source_id>
+    <category>_Getting Started_</category>
+   </Item>
+   <Item type="TOC View" id="D63E7D444D7546C4AE82461C10C448A4" action="add">
+    <related_id keyed_name="World" type="Identity">
+     <Item type="Identity" action="get" select="id">
+      <name>World</name>
+     </Item>
+    </related_id>
+    <sort_order>128</sort_order>
+    <source_id keyed_name="HC Start" type="ItemType" name="HC Start">9F2B9CEAC4A8438E8E653B2E6CE1EBEA</source_id>
+    <start_page>../Solutions/HilleConsultit/scripts/CommonStart.html</start_page>
+   </Item>
+  </Relationships>
+ </Item>
+</AML>
