@@ -1,0 +1,126 @@
+﻿<AML>
+ <Item type="Method" id="AC6588F84F664B13856054C748322374" action="add">
+  <execution_allowed_to keyed_name="World" type="Identity">A73B655731924CD0B027E4F4D5FCC0A9</execution_allowed_to>
+  <method_code><![CDATA['MethodTemplateName=VBMain;
+
+' Adjusts the Vegetarian flag on Parts
+' Depends on Hille.Aras.Core.dll v. 11.12.0.3 or later
+
+Private Inn As Innovator
+Private LogUid As String
+Private Logger As Log.UserMethodLogger
+Private TaskTimer As Utils.Timer.TaskTimer
+Private Level As Integer = 0
+
+Function Main() As Item
+    Init() 
+    Try
+        Logger.Append("Getting leaf parts")
+        Dim leafPartIds As List(Of String) = GetLeafPartsIds()
+        Logger.Append("Got leaf parts (count)" & leafPartIds.Count , TaskTimer.Restart)
+        TraverseUp(leafPartIds)
+    Catch ex As Exception
+        Logger.Append(ex.ToString)
+        Return Inn.newError(ex.Message)
+    Finally
+        Logger.Append("End", TaskTimer.GetTotalTimeInMs)
+        Logger.WriteBufferToFile()
+    End Try
+    
+    Return Me
+End Function
+
+Sub Init()
+    Inn = Me.getInnovator()
+    LogUid =  "123" 'Guid.NewGuid.ToString()
+    Logger = Log.UserMethodLogger.GetLogger(Inn, LogUid)
+    TaskTimer = New Utils.Timer.TaskTimer()
+End Sub
+
+Function GetLeafPartsIds() As List(Of String)
+    Dim partList As New List(Of String)
+    'Dim idPartDict As New Dictionary(Of String, Item)
+
+    ' Get all parent parts    
+    Dim amlParents As String = "<AML><Item action='get' type='Part BOM' select='source_id'><source_id><Item type='Part' action='get'><is_current>1</is_current></Item></source_id></Item></AML>"
+    Dim parentsRes As Item = Inn.applyAML(amlParents)
+    Dim idListParents As New List(Of String) 
+    For i As Integer = 0 To parentsRes.getItemCount-1 
+        idListParents.Add(parentsRes.getItemByIndex(i).getProperty("source_id"))
+    Next
+    
+    ' Get all parts
+    Dim amlAllParts As String = "<AML><Item action='get' type='Part' select='id'></Item>'</AML>"
+    Dim allParts As Item = Inn.applyAML(amlAllParts)
+    Dim allPartsIdList As new List(Of String) 
+    For i As Integer = 0 To allParts.getItemCount-1 
+        allPartsIdList.Add(allParts.getItemByIndex(i).getProperty("id"))
+    Next
+    
+    ' Add include all parts which are not parents - i.e. leafs
+    For Each id As String in allPartsIdList
+        If Not idListParents.Contains(id) Then
+            partList.Add(id)
+        End If
+    Next
+    
+    Return partList
+End Function
+
+
+Function TraverseUp(partIdList As List(Of String)) As List(Of String)
+    ' Check parents for part
+    ' Add those parents for next level to traverse upwards, until no more parent parts can be found
+    Level  += 1
+    TaskTimer.Restart()
+    Dim nextPartIdList As New List(Of String)
+    Dim amlBase As String = "<AML><Item action='get' type='Part BOM'><related_id>{0}</related_id><source_id><Item type='Part' action='get'></Item></source_id></Item></AML>"
+    Logger.Append("Traverse Level: " & Level & " (count) " & partIdList.Count )
+    For Each partId As String In partIdList
+        Dim aml As String = String.Format(amlBase,partId)
+        Dim partBomRes As Item = Inn.applyAML(aml)
+        For i As Integer = 0 to partBomRes.getItemCount() -1
+            Dim child As Item = partBomRes.getItemByIndex(i).getRelatedItem()
+            Dim parent As Item = partBomRes.getItemByIndex(i).getPropertyItem("source_id")
+            If Not nextPartIdList.Contains(parent.getID()) AndAlso parent.getProperty("is_current") = 1 Then
+                nextPartIdList.Add(parent.getID())
+            End If
+            ' Compare and update parent if needed.
+            CompareAndUpdate(child,parent)            
+        Next 
+    Next
+    Logger.Append("Traversed Level: " & Level , TaskTimer.Restart())
+    If nextPartIdList.Count > 0 Then
+        ' Recurse
+        TraverseUp(nextPartIdList)
+    End If
+
+End Function
+
+
+Sub CompareAndUpdate(child As Item, parent As Item) 
+    'Logger.Append("Compare child: " & child.getProperty("item_number") & " and parent: " & parent.getProperty("item_number"))
+    If IsVegetarian(parent) AndAlso Not IsVegetarian(child) Then
+        ' Update parent to non-veg
+        Logger.Append("Updating " & parent.getProperty("item_number") & " to non vegetarian")
+        Dim amlUpdate As String = "<AML><Item action='edit' type='Part' version='0' id='{0}'><is_vegeterian>0</is_vegeterian></Item></AML>"
+        amlUpdate = String.Format(amlUpdate, parent.getID())
+        Dim resUpdate As Item = Inn.applyAML(amlUpdate)
+        If resUpdate.isError() Then
+            Logger.Append(resUpdate.getErrorString())
+        End If
+        
+    End If
+End Sub
+
+Function IsVegetarian(part As Item) As Boolean
+    If part.getProperty("is_vegeterian") = "1" Then
+        Return True
+    Else
+        Return False
+    End If
+End Function]]></method_code>
+  <method_type>VB</method_type>
+  <name>HC_CheckFoodProperties</name>
+ </Item>
+</AML>
