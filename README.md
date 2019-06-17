@@ -12,6 +12,7 @@ Features in short:
 * A better BOM Compare
 * Starting page
 * Open in background (Not implemented)
+* Toggle Field Sets(Not implemented)
 
 * Extended API:
    * History handling
