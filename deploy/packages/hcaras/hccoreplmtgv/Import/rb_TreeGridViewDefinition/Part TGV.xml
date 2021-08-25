@@ -1,5 +1,8 @@
 ﻿<AML>
  <Item type="rb_TreeGridViewDefinition" id="CFA3E41E48BB4284899A5D1D2C9BACB5" action="add">
+  <max_child_items>100</max_child_items>
+  <max_query_depth>2</max_query_depth>
+  <max_query_depth_is_onload>1</max_query_depth_is_onload>
   <query_definition keyed_name="Part Structure" type="qry_QueryDefinition">0676D637CD49489FB0D6D32352BB7033</query_definition>
   <name>Part TGV</name>
   <Relationships>
