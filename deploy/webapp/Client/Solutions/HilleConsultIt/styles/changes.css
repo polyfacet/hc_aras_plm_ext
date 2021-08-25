@@ -1,0 +1,21 @@
+﻿html, body {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+#toolbar_slot {
+	vertical-align: top; 
+	width: 100%;
+	height: 30px;
+	margin: 0px;
+	padding: 0px;
+}
+#gridTD {
+	vertical-align: top; 
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}

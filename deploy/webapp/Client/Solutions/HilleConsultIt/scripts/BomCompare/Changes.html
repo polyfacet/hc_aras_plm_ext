@@ -4,12 +4,12 @@
 <head>
 	<style type="text/css">
 		@import "../../../../public/styles/controls.css";	
-		@import "../../../../Solutions/PLM/styles/changes.css";
+		@import "../../../../Solutions/HilleConsultit/styles/changes.css";
 	</style>
 	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=ScriptSet2"></script>
 	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=XmlDocument"></script>
-	<script type="text/javascript" src="../../../../Solutions/PLM/javascript/gridTools.js"></script>
-	<script type="text/javascript" src="../../../../Solutions/PLM/javascript/toolbarTools.js"></script>
+	<script type="text/javascript" src="../../../../Solutions/HilleConsultit/javascript/gridTools.js"></script>
+	<script type="text/javascript" src="../../../../Solutions/HilleConsultit/javascript/toolbarTools.js"></script>
 	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=/dojo.js"
 		data-dojo-config="isDebug: false, parseOnLoad: false, baseUrl:'../../../../javascript/dojo'"></script>
 </head>
@@ -254,7 +254,9 @@
 				resizable: true
 			};
 			//console.info("Select version");
-			aras.modalDialogHelper.show("DefaultPopup", window, param, options, "../../../../scripts/revisionDialog.html");
+			var wnd = top.aras.getMainWindow();
+			wnd = wnd === top ? wnd.main : top;
+			aras.modalDialogHelper.show("DefaultPopup", wnd, param, options, "revisionDialog.html");
 			
 		}
 		
@@ -276,7 +278,10 @@
 				dialogHeight: 400,
 				resizable: true
 			};
-			aras.modalDialogHelper.show("DefaultPopup", window, params, options,"../../../../scripts/searchDialog.html");
+
+			var wnd = top.aras.getMainWindow();
+			wnd = wnd === top ? wnd.main : top;
+			aras.modalDialogHelper.show("DefaultPopup", wnd, params, options,"searchDialog.html");
 		}
 
 
