@@ -1,6 +1,6 @@
 # hc_aras_plm_ext
 Extended functionality of Aras Innovator Out-Of-The-Box PLM package.
-Developed on R11SP12 and R11SP9
+Developed on R12SP9 (R11SP12 and R11SP9)
 
 Purpose to include some more or less generic and valuable feature on top of the Aras Innovotor Out-Of-The-Box PLM package.
 
@@ -28,7 +28,7 @@ Features in short:
  
  ### Install steps
  #### Code Tree Installation
- 0. (If not running SP12) Recompile https://github.com/hilleconsultit/hc_aras_core_lib for your specific version and modify method-config.xml (compare modifications between method-config.xml and method-config_R11SP12 in this project)
+ 0. (If not running SP12SP9) Recompile https://github.com/hilleconsultit/hc_aras_core_lib for your specific version and modify method-config.xml (compare modifications between method-config.xml and method-config_R12SP9 in this project)
  1. Copy the Client folder located in deploy/webapp
  2. Paste into Innovator-folder (default: C:\Program Files (x86)\Aras\Innovator\Innovator)
  
