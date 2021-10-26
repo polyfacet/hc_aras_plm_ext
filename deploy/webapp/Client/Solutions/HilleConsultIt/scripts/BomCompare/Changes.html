@@ -4,12 +4,11 @@
 <head>
 	<style type="text/css">
 		@import "../../../../public/styles/controls.css";	
-		@import "../../../../Solutions/PLM/styles/changes.css";
 	</style>
 	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=ScriptSet2"></script>
 	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=XmlDocument"></script>
-	<script type="text/javascript" src="../../../../Solutions/PLM/javascript/gridTools.js"></script>
-	<script type="text/javascript" src="../../../../Solutions/PLM/javascript/toolbarTools.js"></script>
+	<script type="text/javascript" src="../../../../Solutions/HilleConsultit/javascript/gridTools.js"></script>
+	<script type="text/javascript" src="../../../../Solutions/HilleConsultit/javascript/toolbarTools.js"></script>
 	<script type="text/javascript" src="../../../../javascript/include.aspx?classes=/dojo.js"
 		data-dojo-config="isDebug: false, parseOnLoad: false, baseUrl:'../../../../javascript/dojo'"></script>
 </head>
@@ -127,7 +126,7 @@
 						"</AML>";
 					console.info("Call Bom Compare on server");
 					result = this.GetItemsResult(aml);
-					debugger;
+					//debugger;
 					if (typeof inputBaseItemId == 'undefined') {
 						// No explicit base input item was set, get i from result.
 						//cachedBaseItemId = result.selectSingleNode("//BaseItem/id").innerHTML;
