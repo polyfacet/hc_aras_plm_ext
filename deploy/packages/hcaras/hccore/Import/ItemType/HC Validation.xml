@@ -40,7 +40,7 @@
    </Item>
    <Item type="Property" id="7491C6D95D264E74B1278EBCCB0C3937" action="add">
     <column_alignment>left</column_alignment>
-    <column_width>20</column_width>
+    <column_width>40</column_width>
     <data_type>image</data_type>
     <is_hidden>0</is_hidden>
     <is_hidden2>0</is_hidden2>
