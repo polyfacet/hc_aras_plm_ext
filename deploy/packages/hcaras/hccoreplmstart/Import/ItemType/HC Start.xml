@@ -41,7 +41,7 @@
     </related_id>
     <sort_order>128</sort_order>
     <source_id keyed_name="HC Start" type="ItemType" name="HC Start">9F2B9CEAC4A8438E8E653B2E6CE1EBEA</source_id>
-    <category>_Getting Started_</category>
+    <category> Getting Started</category>
    </Item>
    <Item type="TOC View" id="D63E7D444D7546C4AE82461C10C448A4" action="add">
     <related_id keyed_name="World" type="Identity">
