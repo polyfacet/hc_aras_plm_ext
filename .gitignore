@@ -36,3 +36,4 @@ deploy/properties/env
 !main/tools/*.dll
 !main/tools/*.pdb
 !deploy/webapp/Server/bin
+workspace.code-workspace
