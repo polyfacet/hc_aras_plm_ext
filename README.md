@@ -1,4 +1,16 @@
 # hc_aras_plm_ext
+
+⚠️ Note this "collection" is not maintained anymore. Some of the features has been extracted to their own repositories.  
+The features that does not have their own repositories, will be left behind here (or get their own in the future), as they are merely concepts or rather trivial.  
+So these concepts and code can be "copied" from here if needed.
+
+## Features which got their own repositories
+
+- [Validations](https://github.com/polyfacet/aras-validations)
+- [BOM Compare](https://github.com/polyfacet/aras-bom-compare)
+
+## Summary of features
+
 Extended functionality of Aras Innovator Out-Of-The-Box PLM package.
 Developed on R12SP9 (R11SP12 and R11SP9)
 
